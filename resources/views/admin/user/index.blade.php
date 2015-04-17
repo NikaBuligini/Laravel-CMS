@@ -7,16 +7,6 @@
 				<i class="fa fa-plus"></i><span>Generate Registration Link</span>
 			</a>
 			<div class="table-responsive">
-				@if(Session::has('flash_message'))
-					<div class="group-alert alert alert-success {{ Session::has('flash_message_important') ? 'alert-important' : '' }}">
-						@if(Session::has('flash_message_important'))
-							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-						@endif
-
-						{!! Session::get('flash_message') !!}
-					</div>
-				@endif
-
 				<table class="table table-bordered table-hover">
 					<thead>
 						<tr>
@@ -69,8 +59,4 @@
 			</div>
 		</div>
 	</div>
-
-	<script>
-		$('div.alert').not('.alert-important').delay(3000).slideUp(300);
-	</script>
 @endsection

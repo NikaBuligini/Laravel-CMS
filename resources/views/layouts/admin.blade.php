@@ -40,6 +40,10 @@
 		</div>
 	</div>
 	<!-- Scripts -->
+	<script>
+		$('div.main-alert-container').not('.alert-important').delay(4000).slideUp(300);
+	</script>
+
 	<script src="{{ asset('/js/bootstrap.min.js') }}"></script>
 	<script src="{{ asset('/js/app.js') }}"></script>
 </body>

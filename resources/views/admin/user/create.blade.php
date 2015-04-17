@@ -4,7 +4,7 @@
 	<div class="admin-page-container">
 		<div class="admin-page-content half">
 			{!! Form::open(array('url' => '/admin/user', 'method' => 'post')) !!}
-				@if(Session::has('flash_message'))
+				@if(Session::has('flash_message') && Session::has('flash_secondary'))
 					<div class="group-alert alert alert-success {{ Session::has('flash_message_important') ? 'alert-important' : '' }}">
 						@if(Session::has('flash_message_important'))
 							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -45,15 +45,6 @@
 	<div class="admin-page-container">
 		<div class="admin-page-content half">
 			<h5 class="content-header">Pending Registration Links</h5>
-			@if(Session::has('link_flash_message'))
-				<div class="group-alert alert alert-success {{ Session::has('flash_message_important') ? 'alert-important' : '' }}">
-					@if(Session::has('flash_message_important'))
-						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-					@endif
-
-					{!! Session::get('link_flash_message') !!}
-				</div>
-			@endif
 			@if($registration_links->toArray())
 				<span>Copy link address and give it to someone for register</span>
 				<table class="table table-bordered">

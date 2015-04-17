@@ -30,4 +30,8 @@ class Group extends Model {
 	public function registration_links() {
 		return $this->hasMany('App\RegistrationLink');
 	}
+
+	public function linkedName() {
+		return '<a href="'.action('Admin\GroupController@show', ['group' => $this->id]).'">'.$this->name.'</a>';
+	}
 }

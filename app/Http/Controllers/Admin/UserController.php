@@ -7,10 +7,12 @@ use App\Group;
 use App\Activity;
 use App\RegistrationLink;
 use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use Carbon\Carbon;
 use Auth;
 use Session;
 use URL;
+use Input;
 
 use Illuminate\Http\Request;
 
@@ -77,6 +79,7 @@ class UserController extends Controller {
 		Session::flash('flash_message', 'New registration link for "'.$group->name.'" group member has been created!<br>
 			Registration link is <a href="'.URL::to('admin/auth/register?_token='.$request['_token'])
 			.'">here</a>. You can send it to person you want to register as an administrator.');
+		Session::flash('flash_secondary', 'true');
 		Session::flash('flash_message_important', 'true');
 
 		return redirect('/admin/user/create');
@@ -99,14 +102,28 @@ class UserController extends Controller {
 		$theme = $general->theme();
 
 		$activities = $user->activities->reverse();
-		// dd($activities);
 		$group = $user->group;
 		$role = $group->role;
 
-		$theme['title'] = 'Show User Profile';
-		$theme['description'] = 'here should appear user profile, activity log and etc';
+		switch (Input::get('tab')) {
+			case 'activities':
+				$tab = 0;
+				break;
+			case 'about':
+				$tab = 1;
+				break;
+			case 'edit':
+				$tab = 2;
+				break;
+			
+			default:
+				$tab = 0;
+				break;
+		}
 
-		return view('admin.user.show', compact('theme', 'activities', 'user', 'group', 'role'));
+		$groups = Group::lists('name', 'id');
+
+		return view('admin.user.show', compact('theme', 'activities', 'user', 'group', 'role', 'groups', 'tab'));
 	}
 
 	/**
@@ -139,8 +156,16 @@ class UserController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id) {
-		//
+	public function update(UpdateUserRequest $request, User $user) {
+		$request->active != null ? $request['active'] = '1' : $request['active'] = '0';
+
+		$user->updated_at = Carbon::now();
+		$user->update($request->all());
+
+		Session::flash('flash_message', 'User has been updated');		
+		Session::flash('flash_success', 'true');		
+		
+		return redirect()->back();
 	}
 
 	/**
@@ -152,7 +177,8 @@ class UserController extends Controller {
 	public function destroy($id) {
 		RegistrationLink::find($id)->first()->delete();
 
-		Session::flash('link_flash_message', 'Registration token has been deleted!');
+		Session::flash('flash_message', 'Registration token has been deleted');
+		Session::flash('flash_success', 'true');
 
 		return redirect('/admin/user/create');
 	}
@@ -168,11 +194,10 @@ class UserController extends Controller {
 			'user_id' => $auth->id
 		]);
 
-		Session::flash('flash_message', $user->linkedName().' has been blocked! 
-			This user cannot log in anymore.');
-		Session::flash('flash_message_important', 'true');
+		Session::flash('flash_message', $user->linkedName().' has been blocked');
+		Session::flash('flash_success', 'true');
 
-		return redirect('/admin/user');
+		return redirect()->back();
 	}
 
 
@@ -186,11 +211,10 @@ class UserController extends Controller {
 			'user_id' => $auth->id
 		]);
 
-		Session::flash('flash_message', $user->linkedName().' has been unblocked! 
-			Now this user can log in and perform actions which his group is allowed.');
-		Session::flash('flash_message_important', 'true');
+		Session::flash('flash_message', $user->linkedName().' has been unblocked');
+		Session::flash('flash_success', 'true');
 
-		return redirect('/admin/user');
+		return redirect()->back();
 	}
 
 }

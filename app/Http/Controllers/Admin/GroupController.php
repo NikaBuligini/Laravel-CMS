@@ -105,7 +105,7 @@ class GroupController extends Controller {
 		$group->updated_at = Carbon::now();
 		$group->update($request->all());
 
-		Session::flash('flash_message', 'Your group has been updated!');
+		Session::flash('flash_message', $group->linkedName().' has been updated');
 		
 		return redirect('/admin/group');
 	}
