@@ -42,6 +42,14 @@
 	<!-- Scripts -->
 	<script>
 		$('div.main-alert-container').not('.alert-important').delay(4000).slideUp(300);
+
+		$(function () {
+			var options = {
+				animation: 'true',
+				trigger: 'hover'
+			};
+			$('[data-toggle="popover"]').popover(options)
+		})
 	</script>
 
 	<script src="{{ asset('/js/bootstrap.min.js') }}"></script>

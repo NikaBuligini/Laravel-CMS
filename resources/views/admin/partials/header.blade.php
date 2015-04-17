@@ -64,9 +64,17 @@
 				</a>
 				<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
 					<li>
+						<a href="{{ URL::to('/') }}">
+							<i class="fa fa-home"></i>
+							<span>Website</span>
+						</a>
 						<a href="#">
 							<i class="fa fa-user"></i>
 							<span>Profile</span>
+						</a>
+						<a href="#">
+							<i class="fa fa-file-text"></i>
+							<span>Account</span>
 						</a>
 						<li>
 						<a href="{{ url('/admin/auth/logout') }}">

@@ -11,7 +11,7 @@
 					{!! Form::text('email', $user['email'], ['class' => 'form-control']) !!}
 				</div>
 				<div class="form-group">
-					{!! Form::label('group_id', 'Group:') !!}
+					{!! Form::label('group_id', 'Group') !!}{!! Html::popover('asdevz') !!}
 					{!! Form::select('group_id', $groups, $user['group_id'], ['class' => 'form-control']) !!}
 				</div>
 				<div class="checkbox">

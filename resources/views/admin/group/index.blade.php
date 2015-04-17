@@ -23,8 +23,8 @@
 							<th class="column-id">#</th>
 							<th>Name</th>
 							<th>Role</th>
-							<th class="column-date">Created_at</th>
-							<th class="column-date">Updated_at</th>
+							<th class="column-date">Created at</th>
+							<th class="column-date">Updated at</th>
 							<th class="column-action">Action</th>
 						</tr>
 					</thead>

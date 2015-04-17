@@ -241,7 +241,7 @@ fieldset[disabled] .btn-primary.active {
 	padding: 0;
 	position: absolute;
 	text-shadow: none;
-	top: 100%;
+	top: 95%;
 	z-index: 1000;
 	border-radius: 2px;
 	min-width: 180px;
@@ -254,6 +254,7 @@ fieldset[disabled] .btn-primary.active {
 }
 .navbar-top-links > li > ul > li .fa {
 	font-size: 14px;
+	width: 15px;
 }
 .navbar-top-links > li > ul > li span {
 	margin-left: 3px;
@@ -527,4 +528,8 @@ button.close {
 .checkbox input[type=checkbox] {
 	position: relative;
 	margin-left: 6px;
+}
+
+.popover-mark {
+	margin: 0 3px;
 }

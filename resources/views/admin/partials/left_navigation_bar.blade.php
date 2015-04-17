@@ -8,6 +8,12 @@
 	<nav class="main-navigation">
 		<ul>
 			<li>
+				<a href="#">
+					<div class="logo"><i class="fa fa-dashboard"></i></div>
+					<span>Dashboard</span>
+				</a>
+			</li>
+			<li>
 				<a href="{{ action('Admin\MenuController@index') }}">
 					<div class="logo"><i class="fa fa-sitemap"></i></div>
 					<span>Menu Management</span>
@@ -35,6 +41,18 @@
 				<a href="{{ action('Admin\UserController@index') }}">
 					<div class="logo"><i class="fa fa-user"></i></div>
 					<span>Users</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<div class="logo"><i class="fa fa-tasks"></i></div>
+					<span>Tasks</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<div class="logo"><i class="fa fa-folder-open"></i></div>
+					<span>File Manager</span>
 				</a>
 			</li>
 		</ul>
