@@ -25,7 +25,7 @@ class General {
 			$this->theme['right_container_class'] = "";
 		}
 
-		$this->theme['user-name'] = Auth::user()->name;
+		$this->theme['auth'] = Auth::user();
 		$this->theme['user-profile-image'] = URL::to('uploads/users/cthulhu.jpg');
 	}
 }

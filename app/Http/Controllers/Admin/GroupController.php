@@ -4,8 +4,10 @@ use App\Http\Controllers\Controller;
 use App\Services\General;
 use App\Group;
 use App\Role;
+use App\Activity;
 use App\Http\Requests\CreateGroupRequest;
 use Session;
+use Auth;
 use Carbon\Carbon;
 
 class GroupController extends Controller {
@@ -51,8 +53,13 @@ class GroupController extends Controller {
 	 * @return Response
 	 */
 	public function store(CreateGroupRequest $request) {
-		Group::create($request->all());
+		$group = Group::create($request->all());
 
+		$auth = Auth::user();
+		Activity::create([
+			'text' => $auth->linkedName().' created '.$group->linkedName(),
+			'user_id' => $auth->id
+		]);
 		Session::flash('flash_message', 'Your group has been created!');
 		
 		return redirect('/admin/group');

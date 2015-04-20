@@ -1,4 +1,4 @@
-<div class="half{{ $tab == 2 ? '' : ' none' }}">
+<div class="half {{ $tab == 2 ? '' : 'none' }}">
 	<div class="admin-page-container">
 		<div class="admin-page-content full">
 			{!! Form::open(array('url' => '/admin/user/'.$user['id'], 'method' => 'put')) !!}
@@ -11,7 +11,7 @@
 					{!! Form::text('email', $user['email'], ['class' => 'form-control']) !!}
 				</div>
 				<div class="form-group">
-					{!! Form::label('group_id', 'Group') !!}{!! Html::popover('asdevz') !!}
+					{!! Form::label('group_id', 'Group').Html::popover('asdevz') !!}
 					{!! Form::select('group_id', $groups, $user['group_id'], ['class' => 'form-control']) !!}
 				</div>
 				<div class="checkbox">

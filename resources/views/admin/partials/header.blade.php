@@ -59,7 +59,7 @@
 			<li>
 				<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<i class="fa fa-user"></i>
-					<span>{{ $theme['user-name'] }}</span>
+					<span>{{ $theme['auth']->name }}</span>
 					<i class="fa fa-caret-down"></i>
 				</a>
 				<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
