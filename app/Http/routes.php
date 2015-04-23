@@ -32,4 +32,6 @@ Route::group(['prefix' => 'admin'], function() {
 	Route::get('user/{id}/destroy', 'Admin\UserController@destroy');
 	Route::get('user/{user}/block', 'Admin\UserController@block');
 	Route::get('user/{user}/unblock', 'Admin\UserController@unblock');
+
+	Route::resource('settings', 'Admin\SettingController');
 });

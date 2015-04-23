@@ -26,7 +26,7 @@
 				</a>
 			</li>
 			<li>
-				<a href="#">
+				<a href="{{ action('Admin\SettingController@index') }}">
 					<div class="logo"><i class="fa fa-cogs"></i></div>
 					<span>Settings</span>
 				</a>

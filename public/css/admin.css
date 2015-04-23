@@ -13,12 +13,13 @@ body {
 
 .wrapper {
 	width: 100%;
+	position: relative;
 }
 
 .gray-bg {
 	margin: 0 0 0 220px;
 	padding: 0 15px;
-	min-height: 700px;
+	min-height: 667px;
 	position: relative;
 	background: #EEEEEE;
 	-webkit-transition: all 0.5s ease;
@@ -33,6 +34,8 @@ body {
 	height: 100%;
 	background-color: transparent;
 	border-color: #2f4050;
+	background: #2f4050;
+	color: #676a6c;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -300,6 +303,10 @@ fieldset[disabled] .btn-primary.active {
 .admin-page-container > .middle-half {
 	width: 50%;
 	margin: 15px 25% 15px 25%;
+}
+.admin-page-container > .three-fourth {
+	width: 75%;
+	margin: 15px 12.5% 15px 12.5%;
 }
 .admin-page-container > .full {
 	width: 96%;
