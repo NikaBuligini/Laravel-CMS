@@ -3,10 +3,10 @@
 		<div class="admin-page-content full">
 			<div class="action-buttons">
 				@if($user['id'] != Auth::user()->id)
-					<a href="{{ action('Admin\UserController@edit', ['user' => $user['id']]) }}" class="btn blue-btn">
-						<i class="fa fa-pencil-square-o"></i>
-						<span>Edit</span>
-					</a>
+				<a href="{{ action('Admin\UserController@edit', ['user' => $user['id']]) }}" class="btn blue-btn">
+					<i class="fa fa-pencil-square-o"></i>
+					<span>Edit</span>
+				</a>
 				<a href="{{ action('Admin\UserController@destroy', ['user' => $user['id']]) }}" class="btn red-btn" data-toggle="modal" data-target="#myModal">
 					<i class="fa fa-trash-o"></i>
 					<span>Delete</span>

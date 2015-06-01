@@ -10,6 +10,8 @@ use Session;
 use Auth;
 use Carbon\Carbon;
 
+use App\Commands\CreateGroupCommand;
+
 class GroupController extends Controller {
 
 	/**
@@ -53,14 +55,7 @@ class GroupController extends Controller {
 	 * @return Response
 	 */
 	public function store(CreateGroupRequest $request) {
-		$group = Group::create($request->all());
-
-		$auth = Auth::user();
-		Activity::create([
-			'text' => $auth->linkedName().' created '.$group->linkedName(),
-			'user_id' => $auth->id
-		]);
-		Session::flash('flash_message', 'Your group has been created!');
+		$this->dispatch(new CreateGroupCommand(Auth::user(), $request));
 		
 		return redirect('/admin/group');
 	}

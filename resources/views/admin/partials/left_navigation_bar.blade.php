@@ -1,6 +1,6 @@
 <div id="left-nav-container" class="left-nav {{ $theme['left_nav_class'] }}">
 	<div class="logo-header">
-		<a href="{{ URL::to('admin/home') }}">
+		<a href="{{ URL::to('admin/user/'.$theme['auth']->id) }}">
 			<img src="{{ $theme['user-profile-image'] }}">
 		</a>
 	</div>

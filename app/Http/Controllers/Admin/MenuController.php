@@ -4,6 +4,14 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Services\General;
 
+use Auth;
+
+use App\Menu;
+use App\MenuStatus;
+use App\MenuLocation;
+use App\Http\Requests\CreateMenuRequest;
+use App\Commands\CreateMenuCommand;
+
 use Illuminate\Http\Request;
 
 class MenuController extends Controller {
@@ -16,10 +24,14 @@ class MenuController extends Controller {
 	public function index(General $general) {
 		$theme = $general->theme();
 
+		$header = Menu::header()->get();
+		$footer = Menu::footer()->get();
+		// Menu::renderSortableHeader($header);
+
 		$theme['title'] = 'Menu';
 		$theme['description'] = 'desc';
 
-		return view('admin.menu.header_menu', compact('theme'));
+		return view('admin.menu.index', compact('theme', 'header', 'footer'));
 	}
 
 	/**
@@ -27,9 +39,44 @@ class MenuController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create()
-	{
-		//
+	public function create(General $general, Menu $menu, Request $request) {
+		$theme = $general->theme();
+
+		$menus = Menu::orderBy('location_id')->lists('name_en', 'id');
+		$menus[0] = "<No Parent>";
+		ksort($menus);
+		// dd($menus);
+		$hide_location = false;
+		if ($request->location) {
+			switch ($request->location) {
+				case 'header':
+					$hide_location = true;
+					$menu->location_id = '1';
+					break;
+
+				case 'footer':
+					$hide_location = true;
+					$menu->location_id = '2';
+					break;
+				
+				default:
+					# code...
+					break;
+			}
+		}
+
+		$initial = true;
+		
+		$menuStatuses = MenuStatus::orderBy('id')->lists('name_en', 'id');
+		$menuLocations = MenuLocation::orderBy('id')->lists('name_en', 'id');
+
+		$theme['title'] = 'Create Menu';
+		$theme['description'] = 'description for menus creation';
+
+		$button_text = 'Add Menu';
+
+		return view('admin.menu.create', compact('theme', 'menu', 'initial', 'menus', 'menuStatuses', 
+			'hide_location', 'menuLocations', 'button_text'));
 	}
 
 	/**
@@ -37,9 +84,10 @@ class MenuController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
-	{
-		//
+	public function store(CreateMenuRequest $request) {
+		$this->dispatch(new CreateMenuCommand(Auth::user(), $request));
+		
+		return redirect('/admin/menu');
 	}
 
 	/**

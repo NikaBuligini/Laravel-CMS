@@ -323,6 +323,20 @@ fieldset[disabled] .btn-primary.active {
 .admin-page-container > .activity:first-child {
 	margin-top: 15px;
 }
+.admin-page-container > .activity > .image {
+	width: 50px;
+	height: 50px;
+	float: left;
+}
+.admin-page-container > .activity > .image img {
+	width: 100%;
+	height: 100%;
+}
+
+.admin-page-container > .activity > .content {
+	padding-left: 15px;
+	float: left;
+}
 
 .half {
 	float: left;
@@ -539,4 +553,51 @@ button.close {
 
 .popover-mark {
 	margin: 0 3px;
+}
+
+
+/* Menu builder */
+.dd {
+	list-style: none;
+	margin: 20px 0;
+	padding: 0 20px;
+	float: left;
+	width: 100%;
+}
+.dd-item {
+	max-width: 100%;
+	min-height: 30px;
+	overflow: hidden;
+}
+.dd-handle {
+	float: left;
+	width: 30px;
+	line-height: 30px;
+	padding: 0 9px;
+	background-color: #1ab394;
+	color: white;
+	cursor: -webkit-grab;
+}
+.nested-list-content {
+	float: left;
+	width: 100%;
+	line-height: 30px;
+	padding: 0 10px 0 0;
+	background-color: #f7f7f7;
+	border: 1px solid #d2d9dd;
+	border-radius: 5px;
+	margin-bottom: 5px;
+}
+.dd-highlight {
+	min-height: 30px;
+	line-height: 30px;
+	border: 2px dashed #1ab394;
+	border-radius: 5px;
+	background-color: #fff;
+	margin-bottom: 5px;
+}
+
+.dd li .dd {
+	margin: 0;
+	padding: 0 0 0 30px;
 }

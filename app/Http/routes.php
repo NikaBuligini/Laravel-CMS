@@ -12,6 +12,8 @@
 */
 
 Route::get('/', 'WelcomeController@index');
+Route::get('calculate', 'WelcomeController@calculate');
+Route::post('postCalculate', 'WelcomeController@postCalculate');
 
 // Route::get('home', 'HomeController@index');
 
