@@ -37,38 +37,102 @@ class Menu extends Model {
 	}
 
 	public function scopeHeader($query) {
-		$query->where('location_id', '1');
+		$query->where('location_id', '1')->orderBy('order');
 	}
 
 	public function scopeFooter($query) {
-		$query->where('location_id', '2');
+		$query->where('location_id', '2')->orderBy('order');
+	}
+
+	public function scopeChildren($query) {
+		$query->where('parent_id', $this->id);
 	}
 
 	public function linkedName() {
 		return '<a href="'.action('Admin\MenuController@show', ['menu' => $this->id]).'">'.$this->name_en.'</a>';
 	}
 
-	public static function renderSortableHeader($header) {
-		dd($header);
+	public function makeHeader() {
+		$this->location_id = 1;
+	}
+
+	public function renderChildren($force_location = false) {
+		if ($force_location) {
+			switch ($force_location) {
+				case 'header':
+					$location = $this->header();
+					break;
+				case 'footer':
+					$location = $this->footer();
+					break;
+				default:
+					throw new \Exception('Invalid force location was passed to renderChildren function');
+			}
+		} else {
+			switch ($this->location_id) {
+				case 1:
+					$location = $this->header();
+					break;
+				case 2:
+					$location = $this->footer();
+					break;
+				default:
+					throw new \Exception('Menu model has invalid location ID');
+			}
+		}
+		$data = $location->children()->get();
+
+		$result = null;
+		foreach ($data as $key => $item) {
+			$result .= 
+				'<li id="node'.$item->order.'" class="dd-item nested-list-item" data-order="'.$item->order.'" data-id="'.$item->id.'">
+					<div class="nested-list-content">
+						<div class="dd-handle nested-list-handle">
+							<i class="fa fa-arrows"></i>
+						</div>
+						<span>'.$item->name_en.'</span>
+						<div class="pull-right">
+							<a href="'.url('admin/menu/edit/'.$item->id).'">Edit</a> |
+							<a href="#" class="delete_toggle" rel="'.$item->id.'">Delete</a>
+							<i class="fa fa-times"></i>
+						</div>
+					</div>
+				</li>';
+		}
+		
+		return $result ? '<ol class="dd-list">'.$result.'</ol>' : null;
+	}
+
+
+	// NOT STABLE
+	public function renderSortableHeader($header) {
+		return $this->buildMenu($header);
+		// dd($this->buildMenu($header));
 	}
 
 	public function buildMenu($menu, $parentid = 0) { 
 		$result = null;
-		foreach ($menu as $item) {
-			if ($item->parent_id == $parentid) { 
-				$result .= "<li class='dd-item nested-list-item' data-order='{$item->order}' data-id='{$item->id}'>
-					<div class='dd-handle nested-list-handle'>
-						<span class='glyphicon glyphicon-move'></span>
-					</div>
-					<div class='nested-list-content'>{$item->label}
-						<div class='pull-right'>
-							<a href='".url("admin/menu/edit/{$item->id}")."'>Edit</a> |
-							<a href='#' class='delete_toggle' rel='{$item->id}'>Delete</a>
-						</div>
-					</div>".$this->buildMenu($menu, $item->id) . "</li>"; 
+		foreach ($menu as $key => $item) {
+			if ($item->parent_id == $parentid) {
+				$result .= 
+					'<li class="dd-item nested-list-item" data-order="'.$item->order.'" data-id="'.$item->id.'">
+						<div class="nested-list-content">
+							<div class="dd-handle nested-list-handle">
+								<i class="fa fa-arrows"></i>
+							</div>
+							<span>'.$item->name_en.'</span>
+							<div class="pull-right">
+								<a href="'.url('admin/menu/edit/'.$item->id).'">Edit</a> |
+								<a href="#" class="delete_toggle" rel="'.$item->id.'">Delete</a>
+							</div>
+						</div>'
+						.$this->buildMenu($menu, $item->id).
+					'</li>';
 			}
 		}
-		return $result ?  "\n<ol class=\"dd-list\">\n$result</ol>\n" : null; 
+
+		return $result ?  "\n<ol class=\"dd-list\">\n$result</ol>\n" : "<ol class='dd-list asd'></ol>"; 
 	}
+	// NOT STABLE
 
 }

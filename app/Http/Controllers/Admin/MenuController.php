@@ -26,13 +26,36 @@ class MenuController extends Controller {
 
 		$header = Menu::header()->get();
 		$footer = Menu::footer()->get();
-		// Menu::renderSortableHeader($header);
+		$menu = new Menu();
+		$menu->id = 0;
+		// $menu->renderChildren('header');
+		// $menu->renderSortableHeader($header);
 
 		$theme['title'] = 'Menu';
 		$theme['description'] = 'desc';
 
-		return view('admin.menu.index', compact('theme', 'header', 'footer'));
+		return view('admin.menu.index', compact('theme', 'menu', 'header', 'footer'));
 	}
+
+
+	// ajax function
+	public function updateMenuOrder(Request $request) {
+		$order = $request->order;
+		$result = array();
+
+		for ($i = 0; $i < count($order); $i++) {
+			$menu = Menu::findOrFail($order[$i]);
+			$temp_order = $i + 1;
+
+			if ($menu->order != $temp_order) {
+				$menu->order = $temp_order;
+				$menu->save();
+			}
+		}
+
+		return ['success' => true];
+	}
+
 
 	/**
 	 * Show the form for creating a new resource.

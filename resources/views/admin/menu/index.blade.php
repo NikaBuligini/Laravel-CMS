@@ -9,37 +9,8 @@
 			</div>
 
 			@if($header)
-			<div class="menu-builder-container">
-				<ul class="dd noselect">
-					@foreach($header as $menu)
-					<li class='dd-item nested-list-item' data-order='{{ $menu->order }}' data-id='{{ $menu->id }}'>
-						<div class='nested-list-content'>
-							<div class='dd-handle nested-list-handle'>
-								<span class='fa fa-arrows-alt'></span>
-							</div>
-							{{ $menu->name_en }}
-							<div class='pull-right'>
-								<a href="{{ url('admin/menu/edit/'.$menu->id) }}">Edit</a> |
-								<a href='#' class='delete_toggle' rel='{{ $menu->id }}'>Delete</a>
-							</div>
-						</div>
-						<ul class="dd">
-							<li class='dd-item nested-list-item' data-order='0' data-id='0'>
-								<div class='nested-list-content'>
-									<div class='dd-handle nested-list-handle'>
-										<span class='fa fa-arrows-alt'></span>
-									</div>
-									a
-									<div class='pull-right'>
-										<a href="{{ url('admin/menu/edit/'.$menu->id) }}">Edit</a> |
-										<a href='#' class='delete_toggle' rel='{{ $menu->id }}'>Delete</a>
-									</div>
-								</div>
-							</li>
-						</ul>
-					</li>
-					@endforeach
-				</ul>
+			<div id="header-list" class="menu-builder-container noselect">
+				{!! $menu->renderChildren('header') !!}
 			</div>
 			@endif
 		</div>
@@ -52,32 +23,54 @@
 			</div>
 
 			@if($footer)
-			<ul>
-				@foreach($footer as $menu)
-				<li>{{ $menu->name_en }}</li>
-				@endforeach
-			</ul>
+			<div id="footer-list" class="menu-builder-container noselect">
+				{!! $menu->renderChildren('footer') !!}
+			</div>
 			@endif
 		</div>
 	</div>
 
 	<script type="text/javascript">
-		$(function() {
-			$('.dd').sortable({
-				containment: '.half',
-				revert: false,
-				handle: '.dd-handle',
-				placeholder: 'dd-highlight',
-				opacity: 0.8,
-			});
+		$(document).ready(function() {
+			$(function() {
+				var h = $('#header-list .dd-list').sortable({
+					revert: false,
+					handle: '.dd-handle',
+					placeholder: 'dd-highlight',
+					opacity: 0.8,
+					helper: 'clone',
+					scroll: true
+				});
 
-			$('.dd').disableSelection();
+				var f = $('#footer-list .dd-list').sortable({
+					revert: false,
+					handle: '.dd-handle',
+					placeholder: 'dd-highlight',
+					opacity: 0.8,
+					helper: 'clone',
+					scroll: true
+				});
+				
+				$('#save-header').click(function() {
+					var order = h.sortable('toArray', {attribute: 'data-id'});
+					console.log(order);
 
-			$('.dd-handle').mousedown(function() {
-				$('.dd-handle').css('cursor', '-webkit-grabbing')
-			});
-			$('.dd-handle').mouseup(function() {
-				$('.dd-handle').css('cursor', '-webkit-grab')
+					$.post('/laravel/public/admin/menu/updateOrder', {order: order},
+						function(data) {
+							console.log('result');
+							console.log(data);
+						}
+					);
+				});
+
+				$('.dd').disableSelection();
+
+				$('.dd-handle').mousedown(function() {
+					$('.dd-handle').css('cursor', '-webkit-grabbing')
+				});
+				$('.dd-handle').mouseup(function() {
+					$('.dd-handle').css('cursor', '-webkit-grab')
+				});
 			});
 		});
 	</script>

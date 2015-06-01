@@ -26,6 +26,7 @@ Route::group(['prefix' => 'admin'], function() {
 		'password' => 'Auth\PasswordController',
 	]);
 	Route::resource('menu', 'Admin\MenuController');
+	Route::post('menu/updateOrder', 'Admin\MenuController@updateMenuOrder');
 	
 	Route::resource('group', 'Admin\GroupController');
 	Route::get('group/{group}/destroy', 'Admin\GroupController@destroy');

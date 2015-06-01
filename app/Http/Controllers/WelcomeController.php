@@ -35,6 +35,12 @@ class WelcomeController extends Controller {
 	 * @return Response
 	 */
 	public function index() {
+		// $client = new \SoapClient("http://192.168.0.100/eLoanSMSLoan/Service.svc?wsdl");
+
+		
+		// $result = $client->CreateLoanApplication(array("mobile" => "598506214", "text" => "Test", "app" => "SMSService"));
+		// dd($result);
+
 		return view('welcome');
 	}
 
