@@ -35,8 +35,6 @@ class CreateMenuCommand extends Command implements SelfHandling {
 		$menu = new Menu($this->request->all());
 		$menu->generateOrder();
 		$menu->save();
-		// dd($menu);
-		// $menu = Menu::create($this->request->all());
 
 		Activity::create([
 			'text' => $this->auth->linkedName().' created new menu named '.$menu->linkedName(),

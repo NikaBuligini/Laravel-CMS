@@ -5,16 +5,18 @@
 				<i class="fa fa-bars"></i>
 			</a>
 		</div>
-		@if(Session::has('flash_message') && !Session::has('flash_secondary'))
-			<div class="main-alert-container">
-				<div class="main-alert-content">
-					@if(Session::has('flash_success'))
-						<i class="fa fa-check"></i>
-					@endif
-					{!! Session::get('flash_message') !!}
+		<div id="alert-container">
+			@if(Session::has('flash_message') && !Session::has('flash_secondary'))
+				<div class="main-alert-container">
+					<div id="flash-message" class="main-alert-content">
+						@if(Session::has('flash_success'))
+							<i class="fa fa-check"></i>
+						@endif
+						{!! Session::get('flash_message') !!}
+					</div>
 				</div>
-			</div>
-		@endif
+			@endif
+		</div>
 		<ul class="nav navbar-top-links navbar-right">
 			<li class="dropdown">
 				<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
