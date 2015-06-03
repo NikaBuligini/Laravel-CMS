@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Services\General;
 
 use Auth;
+use Validator;
 
 use App\Menu;
 use App\MenuStatus;
@@ -174,9 +175,21 @@ class MenuController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
-	{
+	public function destroy($id) {
 		//
+	}
+
+	// ajax method
+	public function ajaxDestroy(Request $request) {
+		$validator = Validator::make($request->all(), ['menu_id' => 'required|min:1|exists:menus,id']);
+
+		if ($validator->fails()) {
+			return ['success' => false, 'message' => $validator->errors()->first('menu_id')];
+		}
+
+		$menu_id = $request->menu_id;
+		// dispatch deletion command
+		return ['success' => true, 'id' => $menu_id];
 	}
 
 }

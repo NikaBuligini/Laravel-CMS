@@ -93,8 +93,8 @@ class Menu extends Model {
 						<span>'.$item->name_en.'</span>
 						<div class="pull-right">
 							<a href="'.url('admin/menu/edit/'.$item->id).'">Edit</a> |
-							<a href="#" class="delete_toggle" rel="'.$item->id.'">Delete</a>
-							<i class="fa fa-times"></i>
+							<a href="#" class="delete_toggle">Delete</a>
+							<i class="fa fa-times delete_toggle" rel="'.$item->id.'"></i>
 						</div>
 					</div>
 				</li>';

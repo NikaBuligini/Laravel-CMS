@@ -94,30 +94,30 @@
 
 					$.post('/laravel/public/admin/menu/updateOrder', {order: order, parent: parent_id},
 						function(data) {
-							var $message;
-							var $icon;
-							var $cls;
-
 							if (data.success) {
-								$message = data.message + (parent_id == 0 ? location : '');
-								$icon = '<i class="fa fa-check"></i>';
+								show_alert('success', data.message + (parent_id == 0 ? location : ''));
 							} else {
-								$message = "Something went wrong. Update didn't happened";
-								$icon = '<i class="fa fa-exclamation-triangle"></i>';
-								$cls = 'alert-error-message';
+								show_alert('error', "Something went wrong. Update didn't happened");
 							}
-
-							$('#alert-container').html(
-								'<div class="main-alert-container">' + 
-									'<div id="flash-message" class="main-alert-content ' + $cls + '">' + 
-										$icon + $message + 
-									'</div>' + 
-								'</div>');
-
-							$('div.main-alert-container').not('.alert-important').delay(3000).slideUp(300);
 						}
 					);
 				}
+
+				$('.delete_toggle').click(function() {
+					console.log('clicked');
+					var elem = $(this);
+
+					$.post('/laravel/public/admin/menu/ajaxDestroy', {menu_id: elem.attr('rel')}, function(data) {
+						console.log(data);
+						if (data.success) {
+							elem.closest('li').remove();
+							show_alert('success', 'Menu has been deleted')
+						} else {
+							show_alert('error', 'Failed to delete menu');
+						}
+						console.log(data.id);
+					});
+				});
 
 				$('.dd').disableSelection();
 
@@ -127,6 +127,32 @@
 				$('.dd-handle').mouseup(function() {
 					$('.dd-handle').css('cursor', '-webkit-grab')
 				});
+
+				function show_alert(type, message) {
+					var $cls;
+					var $icon;
+
+					switch(type) {
+						case 'success':
+							$icon = '<i class="fa fa-check"></i>';
+							break;
+						case 'error':
+							$icon = '<i class="fa fa-exclamation-triangle"></i>';
+							$cls = 'alert-error-message';
+							break;
+						default:
+							break;
+					}
+
+					$('#alert-container').html(
+						'<div class="main-alert-container">' + 
+							'<div id="flash-message" class="main-alert-content ' + $cls + '">' + 
+								$icon + message + 
+							'</div>' + 
+						'</div>');
+
+					$('div.main-alert-container').not('.alert-important').delay(3000).slideUp(300);
+				}
 
 
 				// $('#create_header').click(function(event) {

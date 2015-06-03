@@ -25,17 +25,21 @@ Route::group(['prefix' => 'admin'], function() {
 		'auth' => 'Auth\AuthController',
 		'password' => 'Auth\PasswordController',
 	]);
-	Route::resource('menu', 'Admin\MenuController');
-	Route::post('menu/updateOrder', 'Admin\MenuController@updateMenuOrder');
-	Route::post('menu/ajaxStore', 'Admin\MenuController@ajaxStore');
-	
-	Route::resource('group', 'Admin\GroupController');
-	Route::get('group/{group}/destroy', 'Admin\GroupController@destroy');
 
-	Route::resource('user', 'Admin\UserController');
-	Route::get('user/{id}/destroy', 'Admin\UserController@destroy');
-	Route::get('user/{user}/block', 'Admin\UserController@block');
-	Route::get('user/{user}/unblock', 'Admin\UserController@unblock');
+	Route::group(['middleware' => 'auth'], function() {
+		Route::resource('menu', 'Admin\MenuController');
+		Route::post('menu/updateOrder', 'Admin\MenuController@updateMenuOrder');
+		Route::post('menu/ajaxStore', 'Admin\MenuController@ajaxStore');
+		Route::post('menu/ajaxDestroy', 'Admin\MenuController@ajaxDestroy');
+		
+		Route::resource('group', 'Admin\GroupController');
+		Route::get('group/{group}/destroy', 'Admin\GroupController@destroy');
 
-	Route::resource('settings', 'Admin\SettingController');
+		Route::resource('user', 'Admin\UserController');
+		Route::get('user/{id}/destroy', 'Admin\UserController@destroy');
+		Route::get('user/{user}/block', 'Admin\UserController@block');
+		Route::get('user/{user}/unblock', 'Admin\UserController@unblock');
+
+		Route::resource('settings', 'Admin\SettingController');
+	});
 });
