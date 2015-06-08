@@ -1,98 +1,87 @@
 @extends('layouts.admin')
 
 @section('content')
-	<div class="admin-page-container">
-		<div class="admin-page-content half">
-			<div>
-				<span>Header</span>
-				<a href="menu/create?location=header" class="btn green-btn"><i class="fa fa-plus"></i></a>
-				<button id="new-header" type="button" class="btn green-btn" data-toggle="modal" data-target=".bs-new-header-modal-lg">Add</button>
-				<div class="modal bs-new-header-modal-lg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-					<div class="modal-dialog modal-lg menu-modal">
-						<div id="header-modal" class="modal-content">
-							@include('admin/menu/modal_form', [
-								'parent_id' => 0,
-								'menu' => $base_header,
-								'final' => true,
-								'isCreate' => true,
-								'button_id' => 'create_header'])
-						</div>
-					</div>
-				</div>
-			</div>
-
-			@if($header)
-			<div id="header-list" class="menu-builder-container noselect" data-id="0">
-				{!! $menu->renderChildren('header') !!}
-				<button type="button" class="btn green-btn save" data-target="header">Save</button>
-			</div>
-			@endif
+	<div class="admin-page-container half">
+		<div class="admin-page-content">
+			<div id="list" class="sorable-list" data-id="0" data-location="1"></div>
 		</div>
 	</div>
-	<div class="admin-page-container">
-		<div class="admin-page-content half">
-			<div>
-				<span>Footer</span>
-				<a href="menu/create?location=footer" class="btn green-btn"><i class="fa fa-plus"></i></a>
-				<button id="new-footer" type="button" class="btn green-btn" data-toggle="modal" data-target=".bs-new-footer-modal-lg">Add</button>
-				<div class="modal bs-new-footer-modal-lg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-					<div class="modal-dialog modal-lg menu-modal">
-						<div id="footer-modal" class="modal-content">
-							@include('admin/menu/modal_form', [
-								'parent_id' => 0,
-								'menu' => $base_footer,
-								'final' => true,
-								'isCreate' => true,
-								'button_id' => 'create_footer'])
-						</div>
-					</div>
-				</div>
-			</div>
 
-			@if($footer)
-			<div id="footer-list" class="menu-builder-container noselect" data-id="0">
-				{!! $menu->renderChildren('footer') !!}
-				<button type="button" class="btn green-btn save" data-target="footer">Save</button>
-			</div>
-			@endif
+	<div class="admin-page-container half">
+		<div class="admin-page-content">
+			<div id="list" class="sorable-list" data-id="0" data-location="2"></div>
 		</div>
 	</div>
 
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$(function() {
+				var containers = $('.sorable-list');
+
+				for (var i = 0; i < containers.length; i++) {
+					var item = $(containers[i]);
+					$.post('/admin/menu/getMenus', 
+						{id: item.attr('data-id'), location: item.attr('data-location'), container: i}, 
+						function(data) {
+							if (data.success) {
+								var target = $(containers[data.container]);
+								target.html(data.data);
+
+								install(target);
+							}
+						}
+					);
+				}
+
 				var sortable_options = {
 					revert: false,
 					handle: '.dd-handle',
 					placeholder: 'dd-highlight',
+					cursor: '-webkit-grabbing',
 					opacity: 0.8,
 					helper: 'clone',
 					scroll: false
 				}
 
-				var h = $('#header-list .dd-list').sortable(sortable_options);
-				var f = $('#footer-list .dd-list').sortable(sortable_options);
+				function install(elem) {
+					var l = elem.find('.dd-list').sortable(sortable_options);
 
-				$('.save').click(function(event) {
-					$target = $(this).attr('data-target');
+					elem.find('.save').click(function(event) {
+						$target = elem.find('.save').attr('data-target');
 
-					if ($target == 'header') {
-						var parent_id = $('#header-list').attr('data-id');
-						save(h, parent_id, ' header');
-					} else if ($target == 'footer') {
-						var parent_id = $('#footer-list').attr('data-id');
-						save(f, parent_id, ' footer');
-					} else {
-						console.log('unknown target');
-					}
-				});
+						var parent_id = elem.find('.dd-list').attr('data-id');
+						var location;
+						if ($target == 1) {
+							location = ' header';
+						} else if ($target == 2) {
+							location = ' footer';
+						} else {
+							console.log('unknown target');
+						}
+
+						save(l, parent_id, location);
+					});
+
+					elem.find('.delete_toggle').click(function() {
+						var elem = $(this);
+
+						$.post('/admin/menu/ajaxDestroy', {menu_id: elem.attr('rel')}, function(data) {
+							if (data.success) {
+								elem.closest('li').remove();
+								show_alert('success', 'Menu has been deleted')
+							} else {
+								show_alert('error', 'Failed to delete menu');
+							}
+						});
+					});
+
+					elem.find('.dd').disableSelection();
+				}
 
 				function save(target, parent_id, location) {
 					var order = target.sortable('toArray', {attribute: 'data-id'});
-					console.log(order);
-					console.log(parent_id);
 
-					$.post('/laravel/public/admin/menu/updateOrder', {order: order, parent: parent_id},
+					$.post('/admin/menu/updateOrder', {order: order, parent: parent_id},
 						function(data) {
 							if (data.success) {
 								show_alert('success', data.message + (parent_id == 0 ? location : ''));
@@ -102,31 +91,6 @@
 						}
 					);
 				}
-
-				$('.delete_toggle').click(function() {
-					console.log('clicked');
-					var elem = $(this);
-
-					$.post('/laravel/public/admin/menu/ajaxDestroy', {menu_id: elem.attr('rel')}, function(data) {
-						console.log(data);
-						if (data.success) {
-							elem.closest('li').remove();
-							show_alert('success', 'Menu has been deleted')
-						} else {
-							show_alert('error', 'Failed to delete menu');
-						}
-						console.log(data.id);
-					});
-				});
-
-				$('.dd').disableSelection();
-
-				$('.dd-handle').mousedown(function() {
-					$('.dd-handle').css('cursor', '-webkit-grabbing')
-				});
-				$('.dd-handle').mouseup(function() {
-					$('.dd-handle').css('cursor', '-webkit-grab')
-				});
 
 				function show_alert(type, message) {
 					var $cls;

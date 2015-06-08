@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 
 @section('content')
-	<div class="admin-page-container">
-		<div class="admin-page-content half">
+	<div class="admin-page-container half">
+		<div class="admin-page-content">
 			{!! Form::open(array('url' => '/admin/user', 'method' => 'post')) !!}
 				@if(Session::has('flash_message') && Session::has('flash_secondary'))
 					<div class="group-alert alert alert-success {{ Session::has('flash_message_important') ? 'alert-important' : '' }}">
@@ -42,8 +42,8 @@
 		</div>
 	</div>
 
-	<div class="admin-page-container">
-		<div class="admin-page-content half">
+	<div class="admin-page-container half">
+		<div class="admin-page-content">
 			<h5 class="content-header">Pending Registration Links</h5>
 			@if($registration_links->toArray())
 				<span>Copy link address and give it to someone for register</span>

@@ -14,10 +14,17 @@ use App\Http\Requests\CreateMenuRequest;
 
 use App\Commands\CreateMenuCommand;
 use App\Commands\UpdateMenuOrderCommand;
+use App\Commands\DestroyMenuCommand;
 
 use Illuminate\Http\Request;
 
 class MenuController extends Controller {
+
+	private $HEADER = 1;
+	private $FOOTER = 2;
+
+	private $ACTIVE = 1;
+	private $CANCELED = 2;
 
 	/**
 	 * Display a listing of the resource.
@@ -52,9 +59,40 @@ class MenuController extends Controller {
 	}
 
 
+	public function getMenuSortableList(Request $request) {
+		$id = $request->id;
+		$validator = Validator::make($request->all(), [
+			'id' => 'required|min:0',
+			'location' => 'required_if:id,0|min:1|exists:menu_locations,id'
+		]);
+
+		if ($validator->fails()) {
+			return ['success' => false, 'message' => $validator->errors()->first()];
+		}
+
+		if ($id != 0) {
+			$parent = Menu::findOrFail($id);
+		} else {
+			$parent = new Menu();
+			$parent->id = 0;
+			$parent->location_id = $request->location;
+		}
+
+		$list = $parent->children()->where('location_id', $parent->location_id)->ordered()->get();
+		$canceled_id = $this->CANCELED;
+
+		return [
+			'success' => true, 
+			'data' => view('admin.menu.list', compact('parent', 'list', 'canceled_id'))->render(),
+			'container' => $request->container
+		];
+	}
+
+
 	// ajax function
 	public function updateMenuOrder(Request $request) {
 		$parent = Menu::find($request->parent);
+		var_dump($parent);
 
 		$this->dispatch(new UpdateMenuOrderCommand(Auth::user(), $parent, $request->order));
 
@@ -81,21 +119,10 @@ class MenuController extends Controller {
 		if (!$menu) {
 			$menu = new Menu();
 			$menu->parent_id = 0;
+			$menu->location_id = $this->ACTIVE;
 
 			if ($request->location) {
-				switch ($request->location) {
-					case 'header':
-						$menu->location_id = '1';
-						break;
-
-					case 'footer':
-						$menu->location_id = '2';
-						break;
-					
-					default:
-						$menu->location_id = '1';
-						break;
-				}
+				$menu->location_id = $request->location;
 			}
 		} else {
 			$menu->name_ka = '';
@@ -187,8 +214,8 @@ class MenuController extends Controller {
 			return ['success' => false, 'message' => $validator->errors()->first('menu_id')];
 		}
 
-		$menu_id = $request->menu_id;
-		// dispatch deletion command
+		$this->dispatch(new DestroyMenuCommand(Auth::user(), Menu::findOrFail($request->menu_id)));
+
 		return ['success' => true, 'id' => $menu_id];
 	}
 

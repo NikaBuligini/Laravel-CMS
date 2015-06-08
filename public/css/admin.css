@@ -285,18 +285,18 @@ fieldset[disabled] .btn-primary.active {
 	width: 100%;
 }
 .admin-page-container .admin-page-content {
-	padding: 10px 15px;
+	width: 100%;
+	padding: 25px 15px;
 	float: left;
 	background: #FFFFFF;
 	position: relative;
 	border-top: 2px solid #1ab394;
-	margin-bottom: 20px;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
 	box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
 }
-.admin-page-container > .half {
+.admin-page-container.half {
 	width: 47%;
 	margin: 15px 1% 15px 2%;
 }
@@ -336,6 +336,20 @@ fieldset[disabled] .btn-primary.active {
 .admin-page-container > .activity > .content {
 	padding-left: 15px;
 	float: left;
+}
+.admin-page-container > .admin-page-content > .collapser {
+	position: absolute;
+	top: 10px;
+	right: 20px;
+	cursor: pointer;
+	display: block !important;
+}
+.admin-page-container > .collapsed {
+	height: 35px;
+	overflow: hidden;
+}
+.admin-page-container > .collapsed * {
+	display: none;
 }
 
 .half {
@@ -593,8 +607,8 @@ button.close {
 	margin-bottom: 5px;
 }
 .dd-highlight {
-	min-height: 30px;
-	line-height: 30px;
+	min-height: 32px;
+	line-height: 32px;
 	border: 2px dashed #1ab394;
 	border-radius: 5px;
 	background-color: #fff;
@@ -604,6 +618,26 @@ button.close {
 .dd-list ol {
 	margin: 0;
 	padding: 0 0 0 30px;
+}
+.dd-list .canceled {
+	background-color: #676A6C;
+}
+
+.dd-list a:focus {
+	text-decoration: none;
+}
+
+.dd-list .pull-right .fa {
+	cursor: pointer;
+}
+.dd-list .view_toggle {
+	color: #23527c;
+}
+.dd-list .edit_toggle {
+	color: #1AB394;
+}
+.dd-list .delete_toggle {
+	color: #E50000;
 }
 
 .menu-modal {

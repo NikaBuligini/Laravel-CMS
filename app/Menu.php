@@ -4,6 +4,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Menu extends Model {
 
+	private $ACTIVE = 1;
+	private $CANCELED = 2;
+
 	/**
 	 * The database table used by the model.
 	 *
@@ -48,6 +51,10 @@ class Menu extends Model {
 		$query->where('parent_id', $this->id);
 	}
 
+	public function scopeOrdered($query) {
+		$query->orderBy('order');
+	}
+
 	public function linkedName() {
 		return '<a href="'.action('Admin\MenuController@show', ['menu' => $this->id]).'">'.$this->name_en.'</a>';
 	}
@@ -84,16 +91,21 @@ class Menu extends Model {
 
 		$result = null;
 		foreach ($data as $key => $item) {
+			$type_cls = $item->status_id == $this->CANCELED ? ' canceled' : '';
 			$result .= 
 				'<li id="node'.$item->order.'" class="dd-item nested-list-item" data-order="'.$item->order.'" data-id="'.$item->id.'">
 					<div class="nested-list-content">
-						<div class="dd-handle nested-list-handle">
+						<div class="dd-handle nested-list-handle'.$type_cls.'">
 							<i class="fa fa-arrows"></i>
 						</div>
 						<span>'.$item->name_en.'</span>
 						<div class="pull-right">
-							<a href="'.url('admin/menu/edit/'.$item->id).'">Edit</a> |
-							<a href="#" class="delete_toggle">Delete</a>
+							<a href="'.url('admin/menu/'.$item->id).'">
+								<i class="fa fa-eye view_toggle" rel="'.$item->id.'"></i>
+							</a> | 
+							<a href="'.url('admin/menu/edit/'.$item->id).'">
+								<i class="fa fa-pencil edit_toggle" rel="'.$item->id.'"></i>
+							</a> | 
 							<i class="fa fa-times delete_toggle" rel="'.$item->id.'"></i>
 						</div>
 					</div>

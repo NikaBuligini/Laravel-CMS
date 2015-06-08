@@ -45,11 +45,18 @@
 		$('div.main-alert-container').not('.alert-important').delay(4000).slideUp(300);
 
 		$(function () {
-			var options = {
+			$('[data-toggle="popover"]').popover({
 				animation: 'true',
 				trigger: 'hover'
-			};
-			$('[data-toggle="popover"]').popover(options)
+			});
+
+			// container caret
+			$('.admin-page-content').prepend('<i class="fa fa-caret-up collapser"></i>');
+
+			$('.admin-page-content > .collapser').click(function(event) {
+				$(this).toggleClass('fa-caret-up').toggleClass('fa-caret-down');
+				$(this).parent().toggleClass('collapsed');
+			});
 		})
 	</script>
 
