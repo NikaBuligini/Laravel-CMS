@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 
 @section('content')
-	<div class="admin-page-container">
-		<div class="admin-page-content three-fourth">
+	<div class="admin-page-container three-fourth">
+		<div class="admin-page-content">
 			@if($settings)
 				{!! Form::open(array('url' => '/admin/settings/1', 'method' => 'put', 'class' => 'form-horizontal')) !!}
 			@else

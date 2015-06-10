@@ -1,6 +1,6 @@
 <div class="half{{ $tab == 1 ? '' : ' none' }}">
-	<div class="admin-page-container">
-		<div class="admin-page-content full">
+	<div class="admin-page-container full">
+		<div class="admin-page-content">
 			<div class="action-buttons">
 				@if($user['id'] != Auth::user()->id)
 				<a href="{{ action('Admin\UserController@edit', ['user' => $user['id']]) }}" class="btn blue-btn">

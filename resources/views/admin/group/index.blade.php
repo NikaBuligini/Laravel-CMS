@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 
 @section('content')
-	<div class="admin-page-container">
-		<div class="admin-page-content full">
+	<div class="admin-page-container full">
+		<div class="admin-page-content">
 			<a href="group/create" class="btn green-btn">
 				<i class="fa fa-plus"></i><span>Create</span>
 			</a>

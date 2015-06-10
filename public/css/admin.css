@@ -300,15 +300,15 @@ fieldset[disabled] .btn-primary.active {
 	width: 47%;
 	margin: 15px 1% 15px 2%;
 }
-.admin-page-container > .middle-half {
+.admin-page-container.middle-half {
 	width: 50%;
 	margin: 15px 25% 15px 25%;
 }
-.admin-page-container > .three-fourth {
+.admin-page-container.three-fourth {
 	width: 75%;
 	margin: 15px 12.5% 15px 12.5%;
 }
-.admin-page-container > .full {
+.admin-page-container.full {
 	width: 96%;
 	margin: 15px 2%;
 }
@@ -317,8 +317,8 @@ fieldset[disabled] .btn-primary.active {
 }
 .admin-page-container > .activity {
 	border: 0;
-	margin-top: 10px;
-	margin-bottom: 10px;
+	margin: 10px 3%;
+	width: 94%;
 }
 .admin-page-container > .activity:first-child {
 	margin-top: 15px;

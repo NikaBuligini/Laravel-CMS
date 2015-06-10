@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 
 @section('content')
-	<div class="admin-page-container">
-		<div class="admin-page-content middle-half">
+	<div class="admin-page-container middle-half">
+		<div class="admin-page-content">
 			{!! Form::open(array('url' => '/admin/menu', 'method' => 'post', 'class' => 'form-horizontal')) !!}
 				@include('admin/menu/form')
 			{!! Form::close() !!}

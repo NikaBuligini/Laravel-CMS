@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 
 @section('content')
-	<div class="admin-page-container">
-		<div class="admin-page-content half">
+	<div class="admin-page-container half">
+		<div class="admin-page-content">
 			<div class="action-buttons">
 				<a href="{{ action('Admin\GroupController@edit', ['group' => $group['id']]) }}" class="btn blue-btn">
 					<i class="fa fa-pencil-square-o"></i>
@@ -42,15 +42,17 @@
 				</tbody>
 			</table>
 		</div>
-
-		@if($users)
-			<div class="admin-page-content half">
-				<h5>Users from this group:</h5>
-					@foreach($users as $key => $user)
-						<a href="{{ action('Admin\UserController@show', ['user' => $user['id']]) }}">{{ $user['name'].(end($users)['id'] != $user['id'] ? ',' : '') }}</a>
-					@endforeach
-			</div>
-		@endif
 	</div>
+
+	@if($users)
+	<div class="admin-page-container half">
+		<div class="admin-page-content half">
+			<h5>Users from this group:</h5>
+				@foreach($users as $key => $user)
+					<a href="{{ action('Admin\UserController@show', ['user' => $user['id']]) }}">{{ $user['name'].(end($users)['id'] != $user['id'] ? ',' : '') }}</a>
+				@endforeach
+		</div>
+	</div>
+	@endif
 
 @endsection

@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 
 @section('content')
-	<div class="admin-page-container">
-		<div class="admin-page-content full">
+	<div class="admin-page-container full">
+		<div class="admin-page-content">
 			{!! Form::open(array('url' => '/admin/group/'.$group['id'], 'method' => 'put')) !!}
 				@include('admin/group/form')
 			{!! Form::close() !!}

@@ -1,6 +1,6 @@
 <div class="half {{ $tab == 2 ? '' : 'none' }}">
-	<div class="admin-page-container">
-		<div class="admin-page-content full">
+	<div class="admin-page-container full">
+		<div class="admin-page-content">
 			{!! Form::open(array('url' => '/admin/user/'.$user['id'], 'method' => 'put')) !!}
 				<div class="form-group">
 					{!! Form::label('name', 'Name:') !!}
