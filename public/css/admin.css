@@ -295,6 +295,7 @@ fieldset[disabled] .btn-primary.active {
 	-moz-border-radius: 3px;
 	border-radius: 3px;
 	box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+	float: none;
 }
 .admin-page-container.half {
 	width: 47%;
@@ -312,6 +313,15 @@ fieldset[disabled] .btn-primary.active {
 	width: 96%;
 	margin: 15px 2%;
 }
+
+.one-from-three {width: 33.3%}
+.two-from-three {width: 66.7%}
+.one-from-four {width: 25%;}
+.two-from-four {width: 50%;}
+.three-from-four {width: 75%;}
+.fill-width {width: 100%;}
+.float-left-section {float: left;}
+
 .admin-page-content > .content-header {
 	font-weight: bold;
 }
@@ -334,8 +344,7 @@ fieldset[disabled] .btn-primary.active {
 }
 
 .admin-page-container > .activity > .content {
-	padding-left: 15px;
-	float: left;
+	padding-left: 65px;
 }
 .admin-page-container > .admin-page-content > .collapser {
 	position: absolute;
@@ -576,7 +585,7 @@ button.close {
 	list-style: none;
 	margin: 20px 0;
 	padding: 0 20px;
-	float: left;
+	float: none;
 	width: 100%;
 }
 .dd-item {
@@ -650,4 +659,15 @@ button.close {
 
 .alert-error-message {
 	background: #E50000 !important;
+}
+
+.menu-create {
+	margin-left: 20px;
+}
+.menu-builder-container .save {
+	float: right;
+	margin-right: 20px;
+}
+.menu-builder-container .bottom-actions {
+	height: 35px;
 }

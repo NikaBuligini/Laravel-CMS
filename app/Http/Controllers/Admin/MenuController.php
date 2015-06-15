@@ -11,9 +11,11 @@ use App\Menu;
 use App\MenuStatus;
 use App\MenuLocation;
 use App\Http\Requests\CreateMenuRequest;
+use App\Http\Requests\UpdateMenuRequest;
 
 use App\Commands\CreateMenuCommand;
 use App\Commands\UpdateMenuOrderCommand;
+use App\Commands\UpdateMenuCommand;
 use App\Commands\DestroyMenuCommand;
 
 use Illuminate\Http\Request;
@@ -92,7 +94,6 @@ class MenuController extends Controller {
 	// ajax function
 	public function updateMenuOrder(Request $request) {
 		$parent = Menu::find($request->parent);
-		var_dump($parent);
 
 		$this->dispatch(new UpdateMenuOrderCommand(Auth::user(), $parent, $request->order));
 
@@ -156,6 +157,12 @@ class MenuController extends Controller {
 	public function store(CreateMenuRequest $request) {
 		$this->dispatch(new CreateMenuCommand(Auth::user(), $request));
 		
+		$menu = Menu::find($request->parent_id);
+
+		if ($menu) {
+			return redirect('/admin/menu/'.$menu->id);
+		}
+
 		return redirect('/admin/menu');
 	}
 
@@ -169,9 +176,15 @@ class MenuController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
-	{
-		//
+	public function show(General $general, Menu $menu) {
+		$theme = $general->theme();
+
+		// dd($menu);
+
+		$theme['title'] = $menu->name_en;
+		$theme['description'] = 'single menu';
+
+		return view('admin.menu.show', compact('theme', 'menu'));
 	}
 
 	/**
@@ -180,9 +193,18 @@ class MenuController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
-	{
-		//
+	public function edit(General $general, Menu $menu) {
+		$theme = $general->theme();
+
+		$menuLocations = MenuLocation::orderBy('id')->lists('name_en', 'id');
+		$menuStatuses = MenuStatus::orderBy('id')->lists('name_en', 'id');
+
+		$theme['title'] = 'Edit Menu';
+		$theme['description'] = 'edit menu entry';
+
+		$button_text = 'Update Menu';
+
+		return view('admin.menu.edit', compact('theme', 'menu', 'menuLocations', 'menuStatuses', 'button_text'));
 	}
 
 	/**
@@ -191,9 +213,14 @@ class MenuController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
-	{
-		//
+	public function update(UpdateMenuRequest $request, Menu $menu) {
+		$this->dispatch(new UpdateMenuCommand(Auth::user(), $menu, $request));
+
+		if ($menu->parent_id == 0) {
+			return redirect('/admin/menu');
+		}
+		
+		return redirect('/admin/menu/'.$menu->parent_id);
 	}
 
 	/**
@@ -216,7 +243,7 @@ class MenuController extends Controller {
 
 		$this->dispatch(new DestroyMenuCommand(Auth::user(), Menu::findOrFail($request->menu_id)));
 
-		return ['success' => true, 'id' => $menu_id];
+		return ['success' => true, 'id' => $request->menu_id];
 	}
 
 }

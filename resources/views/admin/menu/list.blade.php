@@ -1,10 +1,10 @@
+@if(!$list->isEmpty())
 <div>
 	<a href="{{ url('admin/menu/create?parent='.$parent->id.'&location='.$parent->location_id) }}" 
-		class="btn green-btn"><i class="fa fa-plus"></i></a>
-	<button id="new-header" type="button" class="btn green-btn" data-toggle="modal" data-target=".bs-new-header-modal-lg">Add</button>
+		class="btn green-btn menu-create">Create</i></a>
+	<!--<button id="new-header" type="button" class="btn green-btn" data-toggle="modal" data-target=".bs-new-header-modal-lg">Add</button>-->
 </div>
 
-@if($list)
 <div id="header-list" class="menu-builder-container noselect">
 	<ol class="dd-list" data-id="{{ $parent->id }}">
 	@foreach($list as $item)
@@ -18,7 +18,7 @@
 					<a href="{{ url('admin/menu/'.$item->id) }}">
 						<i class="fa fa-eye view_toggle" rel="{{ $item->id }}"></i>
 					</a> | 
-					<a href="{{ url('admin/menu/edit/'.$item->id) }}">
+					<a href="{{ url('admin/menu/'.$item->id.'/edit') }}">
 						<i class="fa fa-pencil edit_toggle" rel="{{ $item->id }}"></i>
 					</a> | 
 					<i class="fa fa-times delete_toggle" rel="{{ $item->id }}"></i>
@@ -27,8 +27,12 @@
 		</li>
 	@endforeach
 	</ol>
-	<button type="button" class="btn green-btn save" data-target="{{ $parent->location_id }}">Save</button>
+	<div class="bottom-actions">
+		<button type="button" class="btn green-btn save" data-target="{{ $parent->location_id }}"><i class="fa fa-floppy-o"></i> Save</button>
+	</div>
 </div>
 @else
-	<span>Sorry, there was no menu.</span>
+	<span>Seems there are no children for this menu. You can 
+		<a href="{{ url('admin/menu/create?parent='.$parent->id.'&location='.$parent->location_id) }}">create</a> 
+		new child menu if you want.</span>
 @endif

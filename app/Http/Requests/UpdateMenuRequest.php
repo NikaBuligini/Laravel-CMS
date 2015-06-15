@@ -2,7 +2,7 @@
 
 use App\Http\Requests\Request;
 
-class CreateMenuRequest extends Request {
+class UpdateMenuRequest extends Request {
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -19,13 +19,14 @@ class CreateMenuRequest extends Request {
 	 * @return array
 	 */
 	public function rules() {
+		$menu = $this->route('menu');
 		return [
 			'name_ka' => 'required|min:2',
 			'name_en' => 'required|min:2',
 			'name_ru' => 'required|min:2',
 			'parent_id' => 'required|numeric|min:0',
 			'status_id' => 'required|numeric|exists:menu_statuses,id',
-			'location_id' => 'numeric|exists:menu_locations,id',
+			'location_id' => 'required|numeric|exists:menu_locations,id',
 		];
 	}
 

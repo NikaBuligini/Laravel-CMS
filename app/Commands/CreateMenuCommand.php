@@ -34,6 +34,12 @@ class CreateMenuCommand extends Command implements SelfHandling {
 	public function handle() {
 		$menu = new Menu($this->request->all());
 		$menu->generateOrder();
+
+		if ($menu->location_id == 0) {
+			$parent = Menu::findOrFail($menu->parent_id);
+			$menu->location_id = $parent->location_id;
+		}
+
 		$menu->save();
 
 		Activity::create([
