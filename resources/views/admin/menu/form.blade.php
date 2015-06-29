@@ -16,6 +16,12 @@
 		{!! Form::text('name_ru', $menu['name_ru'], ['class' => 'form-control', 'placeholder' => 'Russian', 'autocomplete' => 'off']) !!}
 	</div>
 </div>
+<div class="form-group">
+	{!! Form::label('slug', ' ', ['class' => 'col-sm-3 control-label']) !!}
+	<div class="col-sm-8">
+		{!! Form::text('slug', $menu['slug'] ? $menu['slug']->name : '', ['class' => 'form-control', 'placeholder' => 'Slug', 'autocomplete' => 'off']) !!}
+	</div>
+</div>
 {!! Form::hidden('parent_id', $menu['parent_id']) !!}
 {{--<div class="form-group">
 	{!! Form::label('parent_id', 'Parent ID:', ['class' => 'col-sm-3 control-label']) !!}

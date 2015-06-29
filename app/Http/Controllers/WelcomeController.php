@@ -1,6 +1,8 @@
 <?php 
 namespace App\Http\Controllers;
 
+use App\Services\Web;
+
 use Request;
 use Validator;
 use View;
@@ -24,8 +26,7 @@ class WelcomeController extends Controller {
 	 *
 	 * @return void
 	 */
-	public function __construct()
-	{
+	public function __construct() {
 		$this->middleware('guest');
 	}
 
@@ -40,10 +41,13 @@ class WelcomeController extends Controller {
 		
 		// $result = $client->CreateLoanApplication(array("mobile" => "598506214", "text" => "Test", "app" => "SMSService"));
 		// dd($result);
-
+		
 		return view('welcome');
 	}
 
+	public function web(Web $web) {
+		return view('main.web', compact('web'));
+	}
 
 	public function calculate() {
 		$data = [];

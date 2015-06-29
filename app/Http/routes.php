@@ -15,6 +15,8 @@ Route::get('/', 'WelcomeController@index');
 Route::get('calculate', 'WelcomeController@calculate');
 Route::post('postCalculate', 'WelcomeController@postCalculate');
 
+Route::get('web', 'WelcomeController@web');
+
 // Route::get('home', 'HomeController@index');
 
 Route::group(['prefix' => 'admin'], function() {

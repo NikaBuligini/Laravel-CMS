@@ -4,8 +4,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Menu extends Model {
 
-	private $ACTIVE = 1;
-	private $CANCELED = 2;
+	const ACTIVE = 1;
+	const CANCELED = 2;
+
 
 	/**
 	 * The database table used by the model.
@@ -19,7 +20,7 @@ class Menu extends Model {
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['name_ka', 'name_en', 'name_ru', 'order', 'parent_id', 'status_id', 'location_id'];
+	protected $fillable = ['name_ka', 'name_en', 'name_ru', 'order', 'parent_id', 'status_id', 'location_id', 'slug_id'];
 
 	public function status() {
 		return $this->belongsTo('App\MenuStatus');
@@ -27,6 +28,14 @@ class Menu extends Model {
 
 	public function location() {
 		return $this->belongsTo('App\MenuLocation');
+	}
+
+	public function slug() {
+		return $this->belongsTo('App\Slug');
+	}
+
+	public function contents() {
+		return $this->hasMany('App\Content');
 	}
 
 	public function generateOrder() {
@@ -53,6 +62,10 @@ class Menu extends Model {
 
 	public function scopeOrdered($query) {
 		$query->orderBy('order');
+	}
+
+	public function scopeActive($query) {
+		$query->where('status_id', self::ACTIVE);
 	}
 
 	public function linkedName() {
@@ -91,7 +104,7 @@ class Menu extends Model {
 
 		$result = null;
 		foreach ($data as $key => $item) {
-			$type_cls = $item->status_id == $this->CANCELED ? ' canceled' : '';
+			$type_cls = $item->status_id == self::CANCELED ? ' canceled' : '';
 			$result .= 
 				'<li id="node'.$item->order.'" class="dd-item nested-list-item" data-order="'.$item->order.'" data-id="'.$item->id.'">
 					<div class="nested-list-content">

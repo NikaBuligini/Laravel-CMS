@@ -6,11 +6,14 @@ use App\Http\Requests\CreateMenuRequest;
 use App\Activity;
 use App\Menu;
 use App\User;
+use App\Slug;
 use Session;
 
 use Illuminate\Contracts\Bus\SelfHandling;
 
 class CreateMenuCommand extends Command implements SelfHandling {
+
+	const SLUG_ATTRIBUTE_MENU = 1;
 
 	protected $auth;
 
@@ -32,6 +35,13 @@ class CreateMenuCommand extends Command implements SelfHandling {
 	 * @return void
 	 */
 	public function handle() {
+		$slug = Slug::create([
+			'name' => $this->request->slug,
+			'slug_attribute_id' => self::SLUG_ATTRIBUTE_MENU
+		]);
+		$this->request['slug_id'] = $slug->id;
+		// dd($slug);
+
 		$menu = new Menu($this->request->all());
 		$menu->generateOrder();
 

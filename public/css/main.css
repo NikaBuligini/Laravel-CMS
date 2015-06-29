@@ -1,0 +1,225 @@
+.menuH {
+	float: left;
+	height: 70px;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	z-index: 4;
+	list-style: none;
+}
+.menuH ul {
+	list-style: none;
+	padding: 0; 
+}
+.menuH a {
+	text-decoration: none;
+}
+
+
+/*                   Head Menu <ul> Styles
+<---------------------------------------------------------------------->
+<---------------------------------------------------------------------->
+<---------------------------------------------------------------------->
+<---------------------------------------------------------------------->*/
+.menu-ka .menuH > li {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.menu-en .menuH > li {
+	padding-left: 20px;
+	padding-right: 20px;
+}
+.menuH > li {
+	float: left;
+	position: relative;
+	height: 100%;
+	text-align: center;
+	padding-top: 25px;
+	padding-right: 10px;
+	border-right: 1px dotted #BCBCBC;
+
+	color: #596b85;
+	font-size: 16px;
+	text-transform: capitalize;
+}
+.menuH > li:last-child {
+	border: 0;
+}
+.menuH > li > a {
+	color: inherit;
+	font-size: 13px;
+	font-weight: lighter;
+	-webkit-transition: color .1s;
+	-moz-transition: color .1s;
+	-o-transition: color .1s;
+	transition: color .1s;
+	padding: 0 10px 26px 20px;
+}
+/* Hover on li */
+.menuH > li:hover {
+	background-color: #33A1DE;
+}
+.menuH > li:hover > a {
+	color: #fff;
+}
+
+/*                Head Menu CHILD <ul> Styles
+<---------------------------------------------------------------------->
+<---------------------------------------------------------------------->
+<---------------------------------------------------------------------->
+<---------------------------------------------------------------------->*/
+.menuH > li > ul {
+	opacity: 0;
+	visibility: hidden;
+	background-color: #FFFFFF;
+	text-align: left;
+	position: absolute;
+	top: 70px;
+	left: 0;
+	padding: 0;
+	border-top: 5px solid #33A1DE;
+	/*border-top: 5px solid #0EBFE9;*/
+	width: 250px;
+	-webkit-box-shadow: 2px 4px 5px 0px rgba(0,0,0,.4);
+	-moz-box-shadow: 2px 4px 5px 0px rgba(0,0,0,.4);
+	box-shadow: 2px 4px 5px 0px rgba(0,0,0,.4);
+}
+.menuH .right > ul {
+	opacity: 0;
+	visibility: hidden;
+	background-color: #BC1B2B;
+	text-align: left;
+	position: absolute;
+	top: 46px;
+	margin-left: 100%;
+	left: -260px;
+	padding: 5px 0;
+	width: 260px;
+	-webkit-box-shadow: 0px 1px 3px rgba(0,0,0,.4);
+	-moz-box-shadow: 0px 1px 3px rgba(0,0,0,.4);
+	box-shadow: 0px 1px 3px rgba(0,0,0,.4);
+}
+/* Show grandchildren */
+.menuH > li:hover > ul {
+	opacity: 1;
+	visibility: visible;
+}
+.menuH > li li:hover {
+	position: relative;
+}
+.menuH > li li:hover > ul {
+	opacity: 1;
+	left: 100%;
+	visibility: visible;
+}
+
+
+/*                Head Menu GRANDCHILD <ul> Styles
+<---------------------------------------------------------------------->
+<---------------------------------------------------------------------->
+<---------------------------------------------------------------------->
+<---------------------------------------------------------------------->*/
+.menuH > li > ul ul {
+	opacity: 0;
+	visibility: hidden;
+	background-color: #FFFFFF;
+	text-align: left;
+	position: absolute;
+	top: -5px;
+	left: 90%;
+	padding: 0;
+	width: 250px;
+	border-top: 5px solid #33A1DE;
+	-webkit-box-shadow: 2px 4px 5px 0px rgba(0,0,0,.4);
+	-moz-box-shadow: 2px 4px 5px 0px rgba(0,0,0,.4);
+	box-shadow: 2px 4px 5px 0px rgba(0,0,0,.4);
+}
+.menuH > li > ul ul a {
+	color: #596b85;
+}
+.menuH > li ul a {
+	color: inherit;
+	font-size: 12px;
+	-webkit-transition: color .1s;
+	-moz-transition: color .1s;
+	-o-transition: color .1s;
+	transition: color .1s;
+}
+.menuH > li > ul li {
+	padding: 12px 15px 12px 20px;
+	font-size: 16px;
+	position: relative;
+}
+
+.menuH > li > ul li:hover {
+	background-color: #33A1DE;
+	opacity: 1;
+}
+.menuH > li > ul li:hover > a {
+	color: #FFF;
+}
+
+.menuH > li > .hasGeneration:after {
+	content: "\f078";
+	color: inherit;
+	display: inline-block;
+	font-family: FontAwesome;
+	margin-left: 7px;
+	top: 31px;
+	right: 14px;
+}
+.menuH > li > ul .hasGeneration:after {
+	content: "\f0da";
+	color: inherit;
+	display: inline-block;
+	font-family: FontAwesome;
+	position: absolute;
+	top: 15px;
+	right: 10px;
+}
+
+
+/*                        Footer Menu Styles
+<---------------------------------------------------------------------->
+<---------------------------------------------------------------------->
+<---------------------------------------------------------------------->
+<---------------------------------------------------------------------->*/
+.menuF {
+	float: none;
+	margin: 0 auto;
+	height: 100%;
+	padding: 18px 0;
+	list-style: none;
+	font-size: 12px;
+}
+.menuF li {
+	float: left;
+}
+.menuF li a {
+	text-decoration: none;
+	color: #fff;
+	padding: 0 10px;
+	cursor: pointer;
+}
+
+
+.navbar_top {
+	background-color: #FFF;
+	border-bottom: 5px solid #D3D3D3;
+}
+.main_logo {
+	float: left;
+	height: 70px;
+	padding-top: 20px;
+	font-size: 23px;
+	margin-right: 20px;
+}
+.main_logo a {
+	text-decoration: none;
+}
+
+
+.web_body {
+	margin-top: 75px;
+	position: relative;
+}

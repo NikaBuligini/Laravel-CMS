@@ -8,6 +8,8 @@ use App\Group;
 use App\RegistrationLink;
 use App\MenuStatus;
 use App\MenuLocation;
+use App\SlugAttribute;
+use App\ContentStatus;
 
 class DatabaseSeeder extends Seeder {
 
@@ -24,6 +26,8 @@ class DatabaseSeeder extends Seeder {
 		$this->call('RegistrationLinkSeeder');
 		$this->call('MenuStatuseSeeder');
 		$this->call('MenuLocationSeeder');
+		$this->call('SlugAttributeSeeder');
+		$this->call('ContentStatusesSeeder');
 	}
 
 }
@@ -84,6 +88,28 @@ class MenuLocationSeeder extends Seeder {
 
 		MenuLocation::create(['name_ka' => 'Header', 'name_en' => 'Header', 'name_ru' => 'Header']);
 		MenuLocation::create(['name_ka' => 'Footer', 'name_en' => 'Footer', 'name_ru' => 'Footer']);
+	}
+
+}
+
+class SlugAttributeSeeder extends Seeder {
+
+	public function run() {
+		DB::table('slug_attributes')->delete();
+
+		SlugAttribute::create(['name' => 'Menu']);
+		SlugAttribute::create(['name' => 'Content']);
+	}
+
+}
+
+class ContentStatusesSeeder extends Seeder {
+
+	public function run() {
+		DB::table('content_statuses')->delete();
+
+		ContentStatus::create(['name' => 'Active']);
+		ContentStatus::create(['name' => 'Canceled']);
 	}
 
 }
