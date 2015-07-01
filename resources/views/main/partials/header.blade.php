@@ -10,6 +10,15 @@
 				<ul class="menuH">
 					{!! $web->renderMenus($web->getHeaderMenus()) !!}
 				</ul>
+				
+				<div class="social_media_icons">
+					<div class="social_media set squared bg-fall fg-rise fg-color">
+						{!! $web->getURL('facebook') !!}
+						{!! $web->getURL('google_p') !!}
+						{!! $web->getURL('twitter') !!}
+						{!! $web->getURL('youtube') !!}
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

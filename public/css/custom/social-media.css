@@ -1,0 +1,159 @@
+.social_media_icons {
+	position: relative;
+	height: 55px;
+	float: right;
+}
+.social_media_icons > .social_media {
+	float: left;
+	width: 200px;
+	height: 100%;
+	padding: 11px 0;
+}
+
+.squared a.social:before {
+	border-radius: 0;
+}
+.bg-fall a {
+	overflow: visible;
+	perspective: 40px;
+	position: relative;
+}
+.bg-fall a:before {
+	transform: rotateX(0deg);
+	transform-origin: center 44px;
+	transform-style: preserve-3d;
+	transition: all .3s ease-in-out;
+}
+.bg-fall a:hover:before {
+	transform: rotateX(90deg);
+}
+.bg-fall a:hover.facebook:before {
+	background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(59, 89, 152, 0.7));
+}
+.bg-fall a:hover.twitter:before {
+	background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 172, 237, 0.7));
+}
+.bg-fall a:hover.google_p:before {
+	background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(204, 33, 39, 0.7));
+}
+.bg-fall a:hover.youtube:before {
+	background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(204, 33, 39, 0.7));
+}
+
+.fg-rise a:after {
+	transition: all .3s ease-in-out;
+}
+.fg-rise a:hover:after {
+	transform: translateY(-4px);
+}
+
+.fg-color a:after {
+	color: #fff;
+	transition: all .3s ease-in-out;
+}
+.fg-color a:hover.facebook:after {
+	color: #3b5998;
+}
+.fg-color a:hover.twitter:after {
+	color: #00aced;
+}
+.fg-color a:hover.google_p:after {
+	color: #cc2127;
+}
+.fg-color a:hover.youtube:after {
+	color: #cc2127;
+}
+
+
+a.social {
+	display: inline-block;
+	height: 32px;
+	line-height: 32px;
+	margin-right: 10px;
+	overflow: hidden;
+	position: relative;
+	text-indent: -9999em;
+	visibility: hidden;
+	width: 32px;
+}
+a.social:before, a.social:after {
+	color: #fff;
+	content: "";
+	display: inline-block;
+	font-family: FontAwesome;
+	font-size: 23px;
+	height: 32px;
+	line-height: 36px;
+	position: absolute;
+	right: 0;
+	text-align: center;
+	text-indent: 0;
+	visibility: visible;
+	width: 32px;
+}
+a.social:after {
+	left: 0;
+	position: absolute;
+}
+
+.squared a.social:before {
+	border-radius: 0;
+}
+
+a.facebook:before {
+	background: #3b5998;
+}
+a.facebook:after {
+	content: "\f09a";
+	top: -1px;
+}
+a.twitter:before {
+	background: #00aced;
+}
+a.twitter:after {
+	content: "\f099";
+	left: 0;
+	top: -2px;
+}
+a.google_p:before {
+	background: #cc2127;
+}
+a.google_p:after {
+	content: "\f0d5";
+	left: 1px;
+	top: -1px;
+}
+a.youtube:before {
+	background: #cc2127;
+}
+a.youtube:after {
+	content: "\f167";
+	left: 0px;
+	top: -2px;
+}
+
+.fg-color a:hover.facebook:after {
+	color: #3b5998;
+}
+.fg-color a:hover.twitter:after {
+	color: #00aced;
+}
+.fg-color a:hover.google_p:after {
+	color: #cc2127;
+}
+.fg-color a:hover.youtube:after {
+	color: #cc2127;
+}
+
+.bg-fall a:hover.facebook:before {
+	background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(59, 89, 152, 0.7));
+}
+.bg-fall a:hover.twitter:before {
+	background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 172, 237, 0.7));
+}
+.bg-fall a:hover.google_p:before {
+	background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(204, 33, 39, 0.7));
+}
+.bg-fall a:hover.youtube:before {
+	background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(204, 33, 39, 0.7));
+}

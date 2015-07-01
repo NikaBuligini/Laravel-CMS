@@ -7,10 +7,25 @@ use App\Menu;
 
 class Web {
 
+	private $social_urls = [
+		'facebook' => 'https://www.facebook.com/',
+		'twitter' => '#',
+		'google_p' => '#',
+		'youtube' => '#',
+	];
+
 	protected $header_menus;
 	
 	function __construct() {
 		
+	}
+
+	public function getURL($target) {
+		if (array_key_exists($target, $this->social_urls)) {
+			return '<a href="'.$this->social_urls[$target].'" target="_blank" class="social '.$target.'"></a>';
+		}
+
+		return '#';
 	}
 
 	public function getHeaderMenus() {

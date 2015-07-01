@@ -1,6 +1,6 @@
 .menuH {
 	float: left;
-	height: 70px;
+	height: 55px;
 	margin: 0;
 	padding: 0;
 	position: relative;
@@ -34,10 +34,8 @@
 	position: relative;
 	height: 100%;
 	text-align: center;
-	padding-top: 25px;
+	padding-top: 18px;
 	padding-right: 10px;
-	border-right: 1px dotted #BCBCBC;
-
 	color: #596b85;
 	font-size: 16px;
 	text-transform: capitalize;
@@ -53,7 +51,7 @@
 	-moz-transition: color .1s;
 	-o-transition: color .1s;
 	transition: color .1s;
-	padding: 0 10px 26px 20px;
+	padding: 0 10px 18px 20px;
 }
 /* Hover on li */
 .menuH > li:hover {
@@ -74,7 +72,7 @@
 	background-color: #FFFFFF;
 	text-align: left;
 	position: absolute;
-	top: 70px;
+	top: 55px;
 	left: 0;
 	padding: 0;
 	border-top: 5px solid #33A1DE;
@@ -209,8 +207,8 @@
 }
 .main_logo {
 	float: left;
-	height: 70px;
-	padding-top: 20px;
+	height: 55px;
+	padding-top: 12px;
 	font-size: 23px;
 	margin-right: 20px;
 }
@@ -223,3 +221,4 @@
 	margin-top: 75px;
 	position: relative;
 }
+
