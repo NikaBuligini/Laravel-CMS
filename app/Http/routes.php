@@ -34,6 +34,8 @@ Route::group(['prefix' => 'admin'], function() {
 		Route::post('menu/ajaxStore', 'Admin\MenuController@ajaxStore');
 		Route::post('menu/ajaxDestroy', 'Admin\MenuController@ajaxDestroy');
 		Route::post('menu/getMenus', 'Admin\MenuController@getMenuSortableList');
+
+		Route::resource('content', 'Admin\ContentController');
 		
 		Route::resource('group', 'Admin\GroupController');
 		Route::get('group/{group}/destroy', 'Admin\GroupController@destroy');

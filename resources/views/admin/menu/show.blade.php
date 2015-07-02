@@ -4,7 +4,7 @@
 	<div class="two-from-three float-left-section">
 		<div class="admin-page-container full">
 			<div class="admin-page-content">
-				<span>Contents</span>
+				<a href="{{ action('Admin\ContentController@create', ['menu' => $menu['id']]) }}">Create new content</a>
 			</div>
 		</div>
 	</div>

@@ -39,13 +39,4 @@
 			</div>
 		</div>
 	</div>
-
-	<textarea>Easy! You should check out MoxieManager!</textarea>
-
-	<script src="{{ asset('/tinymce/tinymce.min.js') }}"></script>
-	<script>tinymce.init({
-		selector:'textarea', 
-		skin: 'ziggs',
-		toolbar: 'newdocument bold italic underline strikethrough alignleft aligncenter alignright alignjustify styleselect formatselect fontselect fontsizeselect cut copy paste bullist numlist outdent indent blockquote undo redo removeformat subscript superscript',
-	});</script>
 @endsection
