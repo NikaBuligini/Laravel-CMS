@@ -11,6 +11,7 @@
 	<link href="{{ asset('/css/bootstrap-theme.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/font-awesome.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/admin.css') }}" rel="stylesheet">
+	<link href="{{ asset('/css/datepicker/bootstrap-datepicker.min.css') }}" rel="stylesheet">
 
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
@@ -23,7 +24,6 @@
 	<![endif]-->
 
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script src="{{ asset('/js/jquery-ui.min.js') }}"></script>
 </head>
 <body>
 	<div class="wrapper">

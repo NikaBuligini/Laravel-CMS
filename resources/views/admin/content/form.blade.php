@@ -16,7 +16,7 @@
 		{!! Form::text('name_ru', $content['name_ru'], ['class' => 'form-control', 'placeholder' => 'Russian', 'autocomplete' => 'off']) !!}
 	</div>
 </div>
-<div class="form-group">
+<div class="form-group hideable static dynamic none">
 	{!! Form::label('slug', 'Slug:', ['class' => 'col-sm-3 control-label']) !!}
 	<div class="col-sm-8">
 		{!! Form::text('slug', $content['slug'] ? $content['slug']->name : '', ['class' => 'form-control', 'placeholder' => 'Slug', 'autocomplete' => 'off']) !!}
@@ -27,6 +27,30 @@
 	{!! Form::label('type_id', 'Type:', ['class' => 'col-sm-3 control-label']) !!}
 	<div class="col-sm-8">
 		{!! Form::select('type_id', $types, $content['type_id'], ['class' => 'form-control']) !!}
+	</div>
+</div>
+
+<!-- Static Content Fields -->
+<div class="form-group hideable static none">
+	{!! Form::label('static_file_name', 'File name:', ['class' => 'col-sm-3 control-label']) !!}
+	<div class="col-sm-8">
+		{!! Form::text('static_file_name', $content['static_file_name'], ['class' => 'form-control', 'placeholder' => '[name].blade.php', 'autocomplete' => 'off']) !!}
+	</div>
+</div>
+
+<!-- URL Content Fields -->
+<div class="form-group hideable url none">
+	{!! Form::label('url', 'URL:', ['class' => 'col-sm-3 control-label']) !!}
+	<div class="col-sm-8">
+		{!! Form::text('url', $content['url'], ['class' => 'form-control', 'placeholder' => 'Redirect URL', 'autocomplete' => 'off']) !!}
+	</div>
+</div>
+
+<!-- Dynamic Content Fields -->
+<div class="form-group hideable dynamic none">
+	{!! Form::label('publish_date', 'Publish Date:', ['class' => 'col-sm-3 control-label']) !!}
+	<div class="col-sm-8 date">
+		{!! Form::text('publish_date', $content['publish_date'], ['class' => 'form-control date', 'placeholder' => 'Content publish at']) !!}
 	</div>
 </div>
 <div class="form-group hideable dynamic none">

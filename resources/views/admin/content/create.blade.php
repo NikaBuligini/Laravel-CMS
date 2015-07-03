@@ -2,6 +2,7 @@
 
 @section('content')
 	<script src="{{ asset('/tinymce/tinymce.min.js') }}"></script>
+	<script src="{{ asset('/js/bootstrap-datepicker.min.js') }}"></script>
 
 	<div class="admin-page-container three-fourth">
 		<div class="admin-page-content">
@@ -44,6 +45,13 @@
 			}
 
 			changeType($('#type_id'));
+
+			$('.date .form-control.date').datepicker({
+				autoclose: true,
+				format: 'mm/dd/yyyy',
+				language: 'ka',
+				todayHighlight: true
+			});
 		});
 	</script>
 @endsection

@@ -1,6 +1,8 @@
 @extends('layouts.admin')
 
 @section('content')
+	<script src="{{ asset('/js/jquery-ui.min.js') }}"></script>
+
 	<div class="two-from-three float-left-section">
 		<div class="admin-page-container full">
 			<div class="admin-page-content">
