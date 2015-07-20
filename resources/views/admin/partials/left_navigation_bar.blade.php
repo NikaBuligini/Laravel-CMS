@@ -50,7 +50,7 @@
 				</a>
 			</li>
 			<li>
-				<a href="#">
+				<a href="{{ action('Admin\FileManagerController@index') }}">
 					<div class="logo"><i class="fa fa-folder-open"></i></div>
 					<span>File Manager</span>
 				</a>

@@ -6,7 +6,7 @@
 
 	<div class="admin-page-container three-fourth">
 		<div class="admin-page-content">
-			{!! Form::open(array('url' => '/admin/menu', 'method' => 'post', 'class' => 'form-horizontal')) !!}
+			{!! Form::open(array('url' => '/admin/content', 'method' => 'post', 'class' => 'form-horizontal')) !!}
 				@include('admin/content/form')
 			{!! Form::close() !!}
 

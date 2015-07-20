@@ -6,8 +6,10 @@ use App\Services\General;
 
 use App\Menu;
 use App\Content;
+use App\ContentStatus;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CreateContentRequest;
 
 class ContentController extends Controller {
 
@@ -28,23 +30,26 @@ class ContentController extends Controller {
 	public function create(General $general, Request $request) {
 		$theme = $general->theme();
 
-		$menu = Menu::findOrFail($request['menu']);
+		$menu = Menu::find($request['menu']);
+		$menus = null;
+
+		if (!$menu) {
+			$menus = Menu::all()->lists('name_en', 'id');
+		}
 
 		$content = new Content();
 
-		$types = [
-			'0' => '---',
-			'1' => 'Static',
-			'2' => 'Dynamic',
-			'3' => 'URL'
-		];
+		$types = ['0' => '---'];
+		foreach (ContentStatus::all()->lists('name', 'id') as $key => $value) {
+			array_push($types, $value);
+		}
 
 		$theme['title'] = 'Create Content';
 		$theme['description'] = 'description for content creation';
 
 		$button_text = 'Create Content';
 
-		return view('admin.content.create', compact('theme', 'menu', 'content', 'types', 'button_text'));
+		return view('admin.content.create', compact('theme', 'menu', 'menus', 'content', 'types', 'button_text'));
 	}
 
 	/**
@@ -52,8 +57,8 @@ class ContentController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store() {
-		//
+	public function store(CreateContentRequest $request) {
+		dd($request);
 	}
 
 	/**

@@ -108,8 +108,9 @@ class ContentStatusesSeeder extends Seeder {
 	public function run() {
 		DB::table('content_statuses')->delete();
 
-		ContentStatus::create(['name' => 'Active']);
-		ContentStatus::create(['name' => 'Canceled']);
+		ContentStatus::create(['name' => 'Static']);
+		ContentStatus::create(['name' => 'Dynamic']);
+		ContentStatus::create(['name' => 'URL']);
 	}
 
 }
