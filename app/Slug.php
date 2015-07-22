@@ -17,4 +17,7 @@ class Slug extends Model {
 		return $this->hasOne('App\Menu');
 	}
 
+	public function content() {
+		return $this->hasOne('App\Content');
+	}
 }

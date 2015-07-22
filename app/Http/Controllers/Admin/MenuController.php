@@ -184,7 +184,9 @@ class MenuController extends Controller {
 		$theme['title'] = $menu->name_en;
 		$theme['description'] = 'single menu';
 
-		return view('admin.menu.show', compact('theme', 'menu'));
+		$contents = $menu->contents()->orderBy('created_at', 'desc')->get();
+
+		return view('admin.menu.show', compact('theme', 'menu', 'contents'));
 	}
 
 	/**

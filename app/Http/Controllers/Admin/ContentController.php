@@ -6,10 +6,14 @@ use App\Services\General;
 
 use App\Menu;
 use App\Content;
-use App\ContentStatus;
+use App\ContentType;
+
+use Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateContentRequest;
+
+use App\Commands\CreateContentCommand;
 
 class ContentController extends Controller {
 
@@ -40,7 +44,7 @@ class ContentController extends Controller {
 		$content = new Content();
 
 		$types = ['0' => '---'];
-		foreach (ContentStatus::all()->lists('name', 'id') as $key => $value) {
+		foreach (ContentType::all()->lists('name', 'id') as $key => $value) {
 			array_push($types, $value);
 		}
 
@@ -58,7 +62,15 @@ class ContentController extends Controller {
 	 * @return Response
 	 */
 	public function store(CreateContentRequest $request) {
-		dd($request);
+		$this->dispatch(new CreateContentCommand(Auth::user(), $request));
+
+		$menu = Menu::find($request->menu_id);
+
+		if ($menu) {
+			return redirect('/admin/menu/'.$menu->id);
+		}
+
+		return redirect('/admin/content');
 	}
 
 	/**

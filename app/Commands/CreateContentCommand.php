@@ -2,8 +2,9 @@
 
 use App\Commands\Command;
 
-use App\Http\Requests\CreateMenuRequest;
+use App\Http\Requests\CreateContentRequest;
 use App\Activity;
+use App\Content;
 use App\Menu;
 use App\User;
 use App\Slug;
@@ -11,9 +12,9 @@ use Session;
 
 use Illuminate\Contracts\Bus\SelfHandling;
 
-class CreateMenuCommand extends Command implements SelfHandling {
+class CreateContentCommand extends Command implements SelfHandling {
 
-	const SLUG_ATTRIBUTE_MENU = 1;
+	const SLUG_ATTRIBUTE_MENU = 2;
 
 	protected $auth;
 
@@ -24,7 +25,7 @@ class CreateMenuCommand extends Command implements SelfHandling {
 	 *
 	 * @return void
 	 */
-	public function __construct(User $user, CreateMenuRequest $request) {
+	public function __construct(User $user, CreateContentRequest $request) {
 		$this->auth = $user;
 		$this->request = $request;
 	}
@@ -40,22 +41,15 @@ class CreateMenuCommand extends Command implements SelfHandling {
 			'slug_attribute_id' => self::SLUG_ATTRIBUTE_MENU
 		]);
 		$this->request['slug_id'] = $slug->id;
+		$this->request['gallery'] = ''; // not yet implemented
 
-		$menu = new Menu($this->request->all());
-		$menu->generateOrder();
-
-		if ($menu->location_id == 0) {
-			$parent = Menu::findOrFail($menu->parent_id);
-			$menu->location_id = $parent->location_id;
-		}
-
-		$menu->save();
+		$content = Content::create($this->request->all());
 
 		Activity::create([
-			'text' => $this->auth->linkedName().' created new menu named '.$menu->linkedName(),
+			'text' => $this->auth->linkedName().' created new content named '.$content->linkedName(),
 			'user_id' => $this->auth->id
 		]);
-		Session::flash('flash_message', 'Your menu has been created!');
+		Session::flash('flash_message', 'Your content has been created!');
 	}
 
 }

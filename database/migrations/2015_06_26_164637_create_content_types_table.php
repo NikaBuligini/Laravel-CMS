@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateContentStatusesTable extends Migration {
+class CreateContentTypesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -11,7 +11,7 @@ class CreateContentStatusesTable extends Migration {
 	 * @return void
 	 */
 	public function up() {
-		Schema::create('content_statuses', function(Blueprint $table) {
+		Schema::create('content_types', function(Blueprint $table) {
 			$table->increments('id');
 			$table->string('name');
 			$table->timestamps();
@@ -24,7 +24,7 @@ class CreateContentStatusesTable extends Migration {
 	 * @return void
 	 */
 	public function down() {
-		Schema::drop('content_statuses');
+		Schema::drop('content_types');
 	}
 
 }

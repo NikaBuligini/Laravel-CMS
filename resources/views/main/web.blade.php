@@ -3,8 +3,8 @@
 @section('content')
 	<div class="container web_body">
 		<div class="row">
-			<div class="col-md-9">
-				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+			<div class="col-md-8 home_carousel">
+				<div id="carousel-example-generic" class="carousel slide card" data-ride="carousel">
 					<!-- Indicators -->
 					<ol class="carousel-indicators">
 						<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -36,6 +36,49 @@
 						<span class="sr-only">Next</span>
 					</a>
 				</div>
+			</div>
+			<div class="col-md-4 news_feed_container">
+				<div class="news_feed">
+					@foreach($feed as $news)
+					<div class="item">
+						<a href="#">
+							<div class="news_feed_img">
+								<img src="{{ $news['image'] }}">
+							</div>
+							<div class="content">
+								<span class="timestamp">{{ $news['publish_date'] }}</span>
+								<div class="news">
+									{!! $news['description_ka'] !!}
+								</div>
+							</div>
+						</a>
+					</div>
+					@endforeach
+				</div>
+			</div>
+		</div>
+		<div class="row middle_row">
+			<div class="col-md-8">
+				<div class="content_card card"></div>
+			</div>
+			<div class="col-md-4">
+				<div class="categories card">
+					<h4>კატეგორიები</h4>
+					<div class="list">
+						<ul>
+							<li>asd</li>
+							<li>asd</li>
+							<li>asd</li>
+							<li>asd</li>
+							<li>asd</li>
+							<li>asd</li>
+						</ul>
+					</div>
+				</div>
+				<div class="partners_item card"></div>
+				<div class="partners_item card"></div>
+				<div class="partners_item card"></div>
+				<div class="partners_item card"></div>
 			</div>
 		</div>
 	</div>

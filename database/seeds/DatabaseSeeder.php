@@ -9,7 +9,7 @@ use App\RegistrationLink;
 use App\MenuStatus;
 use App\MenuLocation;
 use App\SlugAttribute;
-use App\ContentStatus;
+use App\ContentType;
 
 class DatabaseSeeder extends Seeder {
 
@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder {
 		$this->call('MenuStatuseSeeder');
 		$this->call('MenuLocationSeeder');
 		$this->call('SlugAttributeSeeder');
-		$this->call('ContentStatusesSeeder');
+		$this->call('ContentTypesSeeder');
 	}
 
 }
@@ -103,14 +103,14 @@ class SlugAttributeSeeder extends Seeder {
 
 }
 
-class ContentStatusesSeeder extends Seeder {
+class ContentTypesSeeder extends Seeder {
 
 	public function run() {
-		DB::table('content_statuses')->delete();
+		DB::table('content_types')->delete();
 
-		ContentStatus::create(['name' => 'Static']);
-		ContentStatus::create(['name' => 'Dynamic']);
-		ContentStatus::create(['name' => 'URL']);
+		ContentType::create(['name' => 'Static']);
+		ContentType::create(['name' => 'Dynamic']);
+		ContentType::create(['name' => 'URL']);
 	}
 
 }

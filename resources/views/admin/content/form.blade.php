@@ -6,7 +6,7 @@
 
 	function BrowseServer(obj) {
 		urlobj = obj;
-		OpenServerBrowser('/laravel/public/admin/filemanager/show', screen.width * 0.7, screen.height * 0.7);
+		OpenServerBrowser('/laravel/public/media/filemanager/show', screen.width * 0.7, screen.height * 0.7);
 	}
 
 	function OpenServerBrowser(url, width, height) {

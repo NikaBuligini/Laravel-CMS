@@ -48,7 +48,7 @@
 
 			$('.date .form-control.date').datepicker({
 				autoclose: true,
-				format: 'mm/dd/yyyy',
+				format: 'yyyy-mm-dd',
 				language: 'ka',
 				todayHighlight: true
 			});

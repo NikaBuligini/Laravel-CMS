@@ -16,6 +16,7 @@ Route::get('calculate', 'WelcomeController@calculate');
 Route::post('postCalculate', 'WelcomeController@postCalculate');
 
 Route::get('web', 'WelcomeController@web');
+Route::get('mdl', 'WelcomeController@mdl');
 
 // Route::get('home', 'HomeController@index');
 

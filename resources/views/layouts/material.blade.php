@@ -3,15 +3,15 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="csrf-token" content="{{ csrf_token() }}" />
 	<title>Laravel</title>
 
-	<link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet">
-	<link href="{{ asset('/css/bootstrap-theme.min.css') }}" rel="stylesheet">
-	<link href="{{ asset('/css/font-awesome.min.css') }}" rel="stylesheet">
-	<link href="{{ asset('/css/custom/main.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/custom/social-media.css') }}" rel="stylesheet">
+	<link rel="stylesheet" href="{{ asset('/css/custom/mdl.css') }}">
+
+	<link rel="stylesheet" href="{{ asset('/css/material.min.css') }}">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
@@ -26,14 +26,10 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="{{ asset('/js/jquery-ui.min.js') }}"></script>
 </head>
-<body>
-	@include('main.partials.header')
-
+<body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
 	@yield('content')
-
-	@include('main.partials.footer')
 	<!-- Scripts -->
-	<script src="{{ asset('/js/bootstrap.min.js') }}"></script>
+	<script src="{{ asset('/js/material.min.js') }}"></script>
 	<script src="{{ asset('/js/app.js') }}"></script>
 </body>
 </html>

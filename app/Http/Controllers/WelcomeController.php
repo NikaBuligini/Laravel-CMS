@@ -3,6 +3,8 @@ namespace App\Http\Controllers;
 
 use App\Services\Web;
 
+use App\Content;
+
 use Request;
 use Validator;
 use View;
@@ -46,7 +48,13 @@ class WelcomeController extends Controller {
 	}
 
 	public function web(Web $web) {
-		return view('main.web', compact('web'));
+		$feed = Content::orderBy('publish_date', 'desc')->take(3)->get();
+
+		return view('main.web', compact('web', 'feed'));
+	}
+
+	public function mdl(Web $web) {
+		return view('main.mdl', compact('web'));
 	}
 
 	public function calculate() {
