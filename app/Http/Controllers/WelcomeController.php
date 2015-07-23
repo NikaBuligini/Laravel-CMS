@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Services\Web;
 
 use App\Content;
+use App\Slug;
+use App\SlugAttribute;
 
 use Request;
 use Validator;
@@ -51,6 +53,46 @@ class WelcomeController extends Controller {
 		$feed = Content::orderBy('publish_date', 'desc')->take(3)->get();
 
 		return view('main.web', compact('web', 'feed'));
+	}
+
+	public function slug(Web $web, $slug) {
+		$slug = Slug::where('name', $slug)->firstOrFail();
+
+		if ($slug->slug_attribute_id == SlugAttribute::FOR_MENU) {
+			$menu = $slug->menu;
+			$contents = $menu->contents;
+
+			if (!$contents) {
+				dd('no content'); // show 404
+			}
+
+			$first_content = $contents->first();
+			if ($first_content->url) {
+				return redirect($first_content->url);
+			}
+
+			if (count($contents) == 1) {
+				$content = $contents->first();
+
+				dd($content->slug);
+				return redirect(URL::to('/'.$content->slug));
+			} else {
+				// dd($contents);
+				$contents = $contents->take(5); // add skip for pagination
+				return view('main.multi_dynamic_contents', compact('web', 'contents'));
+			}
+		} else if ($slug->slug_attribute_id == SlugAttribute::FOR_CONTENT) {
+			$content = $slug->content;
+
+			if ($content->url) {
+				return redirect($content->url);
+			}
+
+			return view('main.dynamic_content', compact('web', 'content'));
+		}
+
+		// show 404
+		return '404';
 	}
 
 	public function mdl(Web $web) {

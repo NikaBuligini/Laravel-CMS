@@ -13,6 +13,10 @@ class Slug extends Model {
 
 	protected $fillable = array('name', 'slug_attribute_id');
 
+	public function attribute() {
+		return $this->belongsTo('App\SlugAttribute');
+	}
+
 	public function menu() {
 		return $this->hasOne('App\Menu');
 	}

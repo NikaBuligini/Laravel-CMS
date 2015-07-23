@@ -3,7 +3,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="main_logo">
-					<a href="/">
+					<a href="{{ URL::to('/web') }}">
 						<span>Logo</span>
 					</a>
 				</div>

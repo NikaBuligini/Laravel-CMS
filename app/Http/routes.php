@@ -54,3 +54,5 @@ Route::group(['prefix' => 'media'], function() {
 	Route::get('files', 'Admin\FileManagerController@index');
 	Route::controller('filemanager', 'FilemanagerLaravelController');
 });
+
+Route::get('{slug}', 'WelcomeController@slug');

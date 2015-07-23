@@ -15,6 +15,7 @@ class Web {
 	];
 
 	protected $header_menus;
+	protected $footer_menus = [];
 	
 	function __construct() {
 		
@@ -30,6 +31,21 @@ class Web {
 
 	public function getHeaderMenus() {
 		return $this->generateMenus('h');
+	}
+
+	public function getFooterMenus() {
+		if (!$this->footer_menus) {
+			$raw_data = Menu::footer()->active()->get();
+
+			foreach ($raw_data as $menu) {
+				if ($menu->parent_id == 0) {
+					array_push($this->footer_menus, $menu);
+				}
+			}
+			
+		}
+
+		return $this->footer_menus;
 	}
 
 	private function generateMenus($location) {
@@ -74,7 +90,7 @@ class Web {
 
 			if (!$contents->isEmpty()) {
 				$url = $contents->first()->url;
-				$target = $url ? $url : '/'.$item->slug;
+				$target = $url ? $url : URL::to('/'.$item->slug);
 			}
 
 			$html .= '<li>'.'<a href="'.$target.'"'.$class.'>'.$item->name.'</a>';

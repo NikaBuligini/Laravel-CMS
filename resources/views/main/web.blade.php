@@ -41,7 +41,7 @@
 				<div class="news_feed">
 					@foreach($feed as $news)
 					<div class="item">
-						<a href="#">
+						<a href="{{ URL::to('/'.$news->slug->name) }}">
 							<div class="news_feed_img">
 								<img src="{{ $news['image'] }}">
 							</div>
