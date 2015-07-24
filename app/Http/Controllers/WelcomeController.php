@@ -60,7 +60,10 @@ class WelcomeController extends Controller {
 
 		if ($slug->slug_attribute_id == SlugAttribute::FOR_MENU) {
 			$menu = $slug->menu;
-			$contents = $menu->contents;
+			$contents = $menu->contents->sortByDesc(function($content) 
+			{
+				return $content->publish_date;
+			});
 
 			if (!$contents) {
 				dd('no content'); // show 404
@@ -74,8 +77,8 @@ class WelcomeController extends Controller {
 			if (count($contents) == 1) {
 				$content = $contents->first();
 
-				dd($content->slug);
-				return redirect(URL::to('/'.$content->slug));
+				// dd($content->slug);
+				return redirect(action('WelcomeController@slug', ['slug' => $content->slug->name]));
 			} else {
 				// dd($contents);
 				$contents = $contents->take(5); // add skip for pagination

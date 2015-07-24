@@ -555,3 +555,7 @@ footer a:hover, footer a:focus {
 	font-weight: 400;
 	font-size: 13px;
 }
+
+.comments {
+	padding: 30px;
+}
