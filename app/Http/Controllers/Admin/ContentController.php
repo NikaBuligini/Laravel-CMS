@@ -9,11 +9,14 @@ use App\Content;
 use App\ContentType;
 
 use Auth;
+use Session;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateContentRequest;
+use App\Http\Requests\UpdateContentRequest;
 
 use App\Commands\CreateContentCommand;
+use App\Commands\UpdateContentCommand;
 
 class ContentController extends Controller {
 
@@ -43,17 +46,12 @@ class ContentController extends Controller {
 
 		$content = new Content();
 
-		$types = ['0' => '---'];
-		foreach (ContentType::all()->lists('name', 'id') as $key => $value) {
-			array_push($types, $value);
-		}
+		$types = ContentType::chooseTypes();
 
 		$theme['title'] = 'Create Content';
 		$theme['description'] = 'description for content creation';
 
-		$button_text = 'Create Content';
-
-		return view('admin.content.create', compact('theme', 'menu', 'menus', 'content', 'types', 'button_text'));
+		return view('admin.content.create', compact('theme', 'menu', 'menus', 'content', 'types'));
 	}
 
 	/**
@@ -64,13 +62,11 @@ class ContentController extends Controller {
 	public function store(CreateContentRequest $request) {
 		$this->dispatch(new CreateContentCommand(Auth::user(), $request));
 
-		$menu = Menu::find($request->menu_id);
+		if ($request['command_executed']) {
+			return Menu::find($request->menu_id) ? redirect('/admin/menu/'.$menu_id) : redirect('/admin/content');
+		} else {
 
-		if ($menu) {
-			return redirect('/admin/menu/'.$menu->id);
 		}
-
-		return redirect('/admin/content');
 	}
 
 	/**
@@ -79,8 +75,15 @@ class ContentController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id) {
-		//
+	public function show(General $general, Content $content) {
+		$theme = $general->theme();
+
+		$type = $content->type;
+
+		$theme['title'] = $content->name_en;
+		$theme['description'] = '';
+
+		return view('admin.content.show', compact('theme', 'content', 'type'));
 	}
 
 	/**
@@ -89,8 +92,24 @@ class ContentController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id) {
-		//
+	public function edit(General $general, Content $content) {
+		$theme = $general->theme();
+
+		$menu = $content->menu;
+		$menus = null;
+
+		if (!$menu) {
+			$menus = Menu::all()->lists('name_en', 'id');
+		}
+
+		$types = ContentType::chooseTypes();
+
+		$theme['title'] = 'Update Content';
+		$theme['description'] = 'description for content creation';
+
+		$button_text = 'Update Content';
+
+		return view('admin.content.edit', compact('theme', 'menu', 'menus', 'content', 'types', 'button_text'));
 	}
 
 	/**
@@ -99,8 +118,10 @@ class ContentController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id) {
-		//
+	public function update(UpdateContentRequest $request, Content $content) {
+		$this->dispatch(new UpdateContentCommand(Auth::user(), $content, $request));
+
+		return redirect('/admin/content/'.$content->id);
 	}
 
 	/**
@@ -109,8 +130,18 @@ class ContentController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id) {
-		//
+	public function destroy(Content $content) {
+		$menu = $content->menu;
+
+		if ($content->slug) {
+			$content->slug->delete();
+		}
+		$content->delete();
+
+		Session::flash('flash_message', 'Your content has been deleted!');
+		Session::flash('flash_message_important', 'true');
+
+		return redirect('/admin/menu/'.$menu->id);
 	}
 
 }

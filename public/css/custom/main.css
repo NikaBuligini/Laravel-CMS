@@ -515,7 +515,7 @@ footer a:hover, footer a:focus {
 	font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
 	font-weight: 400;
 	font-size: 26px;
-	line-height: 40px;
+	line-height: 33px;
 	margin: 0 0 5px 0;
 	padding: 0 5px;
 	max-width: 90%;
@@ -558,4 +558,9 @@ footer a:hover, footer a:focus {
 
 .comments {
 	padding: 30px;
+}
+
+.social_plugins {
+	width: 100%;
+	height: 30px;
 }

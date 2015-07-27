@@ -24,4 +24,8 @@ class Slug extends Model {
 	public function content() {
 		return $this->hasOne('App\Content');
 	}
+
+	public function link() {
+		return action('WelcomeController@slug', ['slug' => $this->name]);
+	}
 }

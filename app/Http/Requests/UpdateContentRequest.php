@@ -2,14 +2,14 @@
 
 use App\Http\Requests\Request;
 
-class CreateContentRequest extends Request {
+class UpdateContentRequest extends Request {
 
 	/**
 	 * Determine if the user is authorized to make this request.
 	 *
 	 * @return bool
 	 */
-	public function authorize() {
+	public function authorize()	{
 		return true;
 	}
 
@@ -19,15 +19,17 @@ class CreateContentRequest extends Request {
 	 * @return array
 	 */
 	public function rules() {
+		$content = $this->route('content');
+		$slug = $content->slug;
 		return [
-			'name_ka' => 'required_if:type_id,1,2|min:2',
-			'name_en' => 'required_if:type_id,1,2|min:2',
-			'name_ru' => 'required_if:type_id,1,2|min:2',
+			'name_ka' => 'required|min:2',
+			'name_en' => 'required|min:2',
+			'name_ru' => 'required|min:2',
 			
 			'menu_id' => 'required|numeric|exists:menus,id',
 			'type_id' => 'required|numeric|exists:content_types,id',
 
-			'slug' => 'required_if:type_id,1,2|min:2|unique:slugs,name',
+			'slug' => 'required_if:type_id,1,2|min:2|unique:slugs,name'.$slug['id'],
 
 			'static_file_name' => 'required_if:type_id,1|min:2',
 

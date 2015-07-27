@@ -10,11 +10,15 @@ use App\User;
 use App\Slug;
 use Session;
 
+use Illuminate\Contracts\Validation\ValidationException;
+
 use Illuminate\Contracts\Bus\SelfHandling;
 
 class CreateContentCommand extends Command implements SelfHandling {
 
 	const SLUG_ATTRIBUTE_MENU = 2;
+
+	protected $isValid = true;
 
 	protected $auth;
 
@@ -28,6 +32,19 @@ class CreateContentCommand extends Command implements SelfHandling {
 	public function __construct(User $user, CreateContentRequest $request) {
 		$this->auth = $user;
 		$this->request = $request;
+
+		$request['isValid'] = true;
+
+		$menu = Menu::findOrFail($request->menu_id);
+		$contents = $menu->contents;
+
+		if (!$contents->isEmpty()) {
+			$first_type = $contents->first()->type;
+
+			if (!$first_type->isDynamic()) {
+				$this->isValid = false;
+			}
+		}
 	}
 
 	/**
@@ -36,20 +53,29 @@ class CreateContentCommand extends Command implements SelfHandling {
 	 * @return void
 	 */
 	public function handle() {
-		$slug = Slug::create([
-			'name' => $this->request->slug,
-			'slug_attribute_id' => self::SLUG_ATTRIBUTE_MENU
-		]);
-		$this->request['slug_id'] = $slug->id;
-		$this->request['gallery'] = ''; // not yet implemented
+		if ($this->isValid) {
+			$this->request['gallery'] = ''; // not yet implemented
 
-		$content = Content::create($this->request->all());
+			if ($this->request->slug) {
+				$slug = Slug::create([
+					'name' => $this->request->slug,
+					'slug_attribute_id' => self::SLUG_ATTRIBUTE_MENU
+				]);
+				$this->request['slug_id'] = $slug->id;
+			} else {
+				$this->request['slug_id'] = '';
+			}
 
-		Activity::create([
-			'text' => $this->auth->linkedName().' created new content named '.$content->linkedName(),
-			'user_id' => $this->auth->id
-		]);
-		Session::flash('flash_message', 'Your content has been created!');
+			$content = Content::create($this->request->all());
+
+			Activity::create([
+				'text' => $this->auth->linkedName().' created new content named '.$content->linkedName(),
+				'user_id' => $this->auth->id
+			]);
+			Session::flash('flash_message', 'Your content has been created!');
+		}
+
+		$this->request['command_executed'] = $this->isValid;
 	}
 
 }

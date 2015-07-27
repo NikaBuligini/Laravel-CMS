@@ -31,7 +31,7 @@ class WelcomeController extends Controller {
 	 * @return void
 	 */
 	public function __construct() {
-		$this->middleware('guest');
+		// $this->middleware('guest');
 	}
 
 	/**
@@ -50,7 +50,7 @@ class WelcomeController extends Controller {
 	}
 
 	public function web(Web $web) {
-		$feed = Content::orderBy('publish_date', 'desc')->take(3)->get();
+		$feed = Content::news_feed();
 
 		return view('main.web', compact('web', 'feed'));
 	}

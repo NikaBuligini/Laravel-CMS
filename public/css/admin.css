@@ -710,3 +710,8 @@ button.close {
 	width: auto;
 	max-width: 100%;
 }
+
+.admin_content_image_preview {
+	max-height: 150px;
+	width: auto;
+}

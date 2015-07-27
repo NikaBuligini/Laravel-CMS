@@ -6,8 +6,8 @@
 
 	<div class="admin-page-container three-fourth">
 		<div class="admin-page-content">
-			{!! Form::open(array('url' => '/admin/content', 'method' => 'post', 'class' => 'form-horizontal')) !!}
-				@include('admin/content/form', ['button_text' => 'Create Content'])
+			{!! Form::open(array('url' => '/admin/content/'.$content['id'], 'method' => 'put', 'class' => 'form-horizontal')) !!}
+				@include('admin/content/form', ['button_text' => 'Update Content'])
 			{!! Form::close() !!}
 
 			@if($errors->any())

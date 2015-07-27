@@ -31,28 +31,22 @@
 	}
 </script>
 
-<div class="form-group">
+<div class="form-group hideable static dynamic">
 	{!! Form::label('name_ka', 'Title:', ['class' => 'col-sm-3 control-label']) !!}
 	<div class="col-sm-8">
 		{!! Form::text('name_ka', $content['name_ka'], ['class' => 'form-control', 'placeholder' => 'Georgian', 'autocomplete' => 'off']) !!}
 	</div>
 </div>
-<div class="form-group">
+<div class="form-group hideable static dynamic">
 	{!! Form::label('name_en', ' ', ['class' => 'col-sm-3 control-label']) !!}
 	<div class="col-sm-8">
 		{!! Form::text('name_en', $content['name_en'], ['class' => 'form-control', 'placeholder' => 'English', 'autocomplete' => 'off']) !!}
 	</div>
 </div>
-<div class="form-group">
+<div class="form-group hideable static dynamic">
 	{!! Form::label('name_ru', ' ', ['class' => 'col-sm-3 control-label']) !!}
 	<div class="col-sm-8">
 		{!! Form::text('name_ru', $content['name_ru'], ['class' => 'form-control', 'placeholder' => 'Russian', 'autocomplete' => 'off']) !!}
-	</div>
-</div>
-<div class="form-group hideable static dynamic none">
-	{!! Form::label('slug', 'Slug:', ['class' => 'col-sm-3 control-label']) !!}
-	<div class="col-sm-8">
-		{!! Form::text('slug', $content['slug'] ? $content['slug']->name : '', ['class' => 'form-control', 'placeholder' => 'Slug', 'autocomplete' => 'off']) !!}
 	</div>
 </div>
 
@@ -70,6 +64,13 @@
 	{!! Form::label('type_id', 'Type:', ['class' => 'col-sm-3 control-label']) !!}
 	<div class="col-sm-8">
 		{!! Form::select('type_id', $types, $content['type_id'], ['class' => 'form-control']) !!}
+	</div>
+</div>
+
+<div class="form-group hideable static dynamic none">
+	{!! Form::label('slug', 'Slug:', ['class' => 'col-sm-3 control-label']) !!}
+	<div class="col-sm-8">
+		{!! Form::text('slug', $content['slug'] ? $content['slug']->name : '', ['class' => 'form-control', 'placeholder' => 'Slug', 'autocomplete' => 'off']) !!}
 	</div>
 </div>
 
@@ -93,7 +94,7 @@
 <div class="form-group hideable dynamic none">
 	{!! Form::label('publish_date', 'Publish Date:', ['class' => 'col-sm-3 control-label']) !!}
 	<div class="col-sm-8 date">
-		{!! Form::text('publish_date', $content['publish_date'], ['class' => 'form-control date', 'placeholder' => 'Content publish at']) !!}
+		{!! Form::text('publish_date', $content['publish_date'], ['class' => 'form-control date', 'placeholder' => 'Content publish at', 'autocomplete' => 'off']) !!}
 	</div>
 </div>
 <div class="form-group hideable dynamic none">
@@ -103,8 +104,8 @@
 		<span id="image-upload-button"><i class="fa fa-picture-o"></i>Upload</span>
 	</div>
 </div>
-<div class="form-group hideable none img_prewiev">
-	{!! Form::label('image', 'Image Preview:', ['class' => 'col-sm-3 control-label']) !!}
+<div class="form-group hideable img_prewiev none">
+	{!! Form::label('image-preview', 'Image Preview:', ['class' => 'col-sm-3 control-label']) !!}
 	<div id="image-preview" class="col-sm-8"></div>
 </div>
 <div class="form-group hideable dynamic none">
@@ -182,7 +183,6 @@
 	$('#image').on('change keyup paste', function() {
 		var value = $(this).val();
 		console.log(value);
-		// $('#image-preview').html('<img src="' + $(this).val() + '" />');
 		if (value.length != 0) {
 			show_prewiev(value);
 		} else {
@@ -193,6 +193,7 @@
 	function show_prewiev(src) {
 		if (src.length != 0 && !img_upload) {
 			$('.img_prewiev').removeClass('none');
+			console.log('show');
 			$('#image-preview').html('<img src="' + src + '" />');
 		}
 	}
@@ -202,7 +203,39 @@
 		$('#image-preview').html('');
 	}
 
-	if ($('#image').val().length != 0) {
-		show_prewiev($('#image').val());
-	}
+	$(document).ready(function() {
+		$('#type_id').change(function(event) {
+			changeType($(this));
+		});
+
+		function changeType(elem) {
+			$('.hideable').addClass('none');
+			switch(elem.val()) {
+				case '0': break;
+				case '1':
+					$('.static').removeClass('none');
+					break;
+				case '2':
+					$('.dynamic').removeClass('none');
+					if ($('#image').val().length != 0) {
+						show_prewiev($('#image').val());
+					}
+					break;
+				case '3':
+					$('.url').removeClass('none');
+					break;
+				default:
+					alert('Invalid type');
+			}
+		}
+
+		changeType($('#type_id'));
+
+		$('.date .form-control.date').datepicker({
+			autoclose: true,
+			format: 'yyyy-mm-dd',
+			language: 'ka',
+			todayHighlight: true
+		});
+	});
 </script>

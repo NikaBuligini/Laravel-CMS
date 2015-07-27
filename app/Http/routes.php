@@ -37,6 +37,7 @@ Route::group(['prefix' => 'admin'], function() {
 		Route::post('menu/getMenus', 'Admin\MenuController@getMenuSortableList');
 
 		Route::resource('content', 'Admin\ContentController');
+		Route::get('content/{content}/destroy', 'Admin\ContentController@destroy');
 		
 		Route::resource('group', 'Admin\GroupController');
 		Route::get('group/{group}/destroy', 'Admin\GroupController@destroy');
