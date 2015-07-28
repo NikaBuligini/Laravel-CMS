@@ -22,7 +22,7 @@ Route::get('mdl', 'WelcomeController@mdl');
 
 Route::group(['prefix' => 'admin'], function() {
 	Route::get('/', 'Auth\AuthController@index');
-	Route::get('home', 'HomeController@index');
+	Route::get('home', 'Admin\MenuController@index');
 	Route::post('ajax/navigation_position', 'Admin\AjaxController@changeNavigation');
 	Route::controllers([
 		'auth' => 'Auth\AuthController',
@@ -41,6 +41,13 @@ Route::group(['prefix' => 'admin'], function() {
 		
 		Route::resource('group', 'Admin\GroupController');
 		Route::get('group/{group}/destroy', 'Admin\GroupController@destroy');
+
+		Route::resource('carousel', 'Admin\CarouselController');
+		Route::get('carousel/{carousel}/destroy', 'Admin\CarouselController@destroy');
+
+		Route::resource('banner', 'Admin\BannerController');
+		Route::get('banner/{banner}/destroy', 'Admin\BannerController@destroy');
+		Route::post('banner/updateOrder', 'Admin\BannerController@updateBannerOrder');
 
 		Route::resource('user', 'Admin\UserController');
 		Route::get('user/{id}/destroy', 'Admin\UserController@destroy');

@@ -324,7 +324,7 @@ body {
 footer {
 	width: 100%;
 	min-height: 100px;
-	margin-top: 40px;
+	margin-top: 80px;
 	padding: 40px 0;
 	color: #9e9e9e;
 	background-color: #424242;
@@ -393,8 +393,14 @@ footer a:hover, footer a:focus {
 }
 
 .partners_item {
-	min-height: 100px;
+	/*min-height: 100px;*/
+	height: 100px;
 	margin-top: 17px;
+	overflow: hidden;
+}
+.partners_item img {
+	width: 100%;
+	height: 100%;
 }
 
 .contents_container .item {

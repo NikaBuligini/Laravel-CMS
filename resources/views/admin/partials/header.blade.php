@@ -8,9 +8,11 @@
 		<div id="alert-container">
 			@if(Session::has('flash_message') && !Session::has('flash_secondary'))
 				<div class="main-alert-container">
-					<div id="flash-message" class="main-alert-content">
+					<div id="flash-message" class="main-alert-content {{ Session::has('flash_fail') ? 'alert-error-message' : '' }}">
 						@if(Session::has('flash_success'))
 							<i class="fa fa-check"></i>
+						@elseif(Session::has('flash_fail'))
+							<i class="fa fa-exclamation-triangle"></i>
 						@endif
 						{!! Session::get('flash_message') !!}
 					</div>

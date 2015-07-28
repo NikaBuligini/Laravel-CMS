@@ -89,6 +89,8 @@ class WelcomeController extends Controller {
 
 			if ($content->url) {
 				return redirect($content->url);
+			} else if ($content->static_file_name) {
+				return view('main.statics.'.$content['static_file_name'], compact('web', 'content'));
 			}
 
 			return view('main.dynamic_content', compact('web', 'content'));

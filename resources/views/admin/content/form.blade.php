@@ -6,7 +6,7 @@
 
 	function BrowseServer(obj) {
 		urlobj = obj;
-		OpenServerBrowser('/laravel/public/media/filemanager/show', screen.width * 0.7, screen.height * 0.7);
+		OpenServerBrowser(url_head + '/public/media/filemanager/show', screen.width * 0.7, screen.height * 0.7);
 	}
 
 	function OpenServerBrowser(url, width, height) {
@@ -170,10 +170,6 @@
 			'bold italic underline forecolor backcolor alignleft aligncenter alignright alignjustify bullist numlist outdent indent removeformat',
 			'link image media searchreplace insertdatetime table template print preview',
 		],
-		// link_list: [
-		// 	{title: 'My page 1', value: 'http://www.tinymce.com'},
-		// 	{title: 'My page 2', value: 'http://www.moxiecode.com'}
-		// ]
 	});
 
 	$('#image-upload-button').click(function() {

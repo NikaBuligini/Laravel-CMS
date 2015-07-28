@@ -63,9 +63,11 @@ class ContentController extends Controller {
 		$this->dispatch(new CreateContentCommand(Auth::user(), $request));
 
 		if ($request['command_executed']) {
-			return Menu::find($request->menu_id) ? redirect('/admin/menu/'.$menu_id) : redirect('/admin/content');
+			return Menu::find($request->menu_id) ? redirect('/admin/menu/'.$request->menu_id) : redirect('/admin/content');
 		} else {
-
+			Session::flash('flash_fail', 'true');
+			Session::flash('flash_message', 'You cannot add content with this type');
+			return redirect()->back();
 		}
 	}
 

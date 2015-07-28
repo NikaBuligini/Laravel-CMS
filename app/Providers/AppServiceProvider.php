@@ -1,6 +1,9 @@
 <?php namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Validator;
+
+use App\Menu;
 
 class AppServiceProvider extends ServiceProvider {
 
@@ -9,9 +12,18 @@ class AppServiceProvider extends ServiceProvider {
 	 *
 	 * @return void
 	 */
-	public function boot()
-	{
-		//
+	public function boot() {
+		Validator::extend('correct_type', function($attribute, $value, $parameters) {
+			$contents = Menu::findOrFail($parameters[0])->contents;
+
+			if (!$contents->isEmpty()) {
+				$first_type = $contents->first()->type;
+
+				return $first_type->isDynamic() ? $value == $first_type->dynamic_type : false;
+			}
+
+            return true;
+        });
 	}
 
 	/**

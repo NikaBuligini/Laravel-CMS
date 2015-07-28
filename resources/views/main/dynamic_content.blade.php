@@ -36,25 +36,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-4">
-				<div class="categories card">
-					<h4>კატეგორიები</h4>
-					<div class="list">
-						<ul>
-							<li>asd</li>
-							<li>asd</li>
-							<li>asd</li>
-							<li>asd</li>
-							<li>asd</li>
-							<li>asd</li>
-						</ul>
-					</div>
-				</div>
-				<div class="partners_item card"></div>
-				<div class="partners_item card"></div>
-				<div class="partners_item card"></div>
-				<div class="partners_item card"></div>
-			</div>
+			
+			@include('main/partials/right_pannel')
 		</div>
 	</div>
 @endsection

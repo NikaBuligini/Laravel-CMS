@@ -25,7 +25,7 @@ class CreateContentRequest extends Request {
 			'name_ru' => 'required_if:type_id,1,2|min:2',
 			
 			'menu_id' => 'required|numeric|exists:menus,id',
-			'type_id' => 'required|numeric|exists:content_types,id',
+			'type_id' => 'required|numeric|exists:content_types,id|correct_type:'.$this['menu_id'],
 
 			'slug' => 'required_if:type_id,1,2|min:2|unique:slugs,name',
 

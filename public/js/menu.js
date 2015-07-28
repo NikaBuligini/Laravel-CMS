@@ -4,7 +4,7 @@ $(document).ready(function() {
 
 		for (var i = 0; i < containers.length; i++) {
 			var item = $(containers[i]);
-			$.post('/laravel/public/admin/menu/getMenus', 
+			$.post(url_head + '/public/admin/menu/getMenus', 
 				{id: item.attr('data-id'), location: item.attr('data-location'), container: i}, 
 				function(data) {
 					if (data.success) {
@@ -49,7 +49,7 @@ $(document).ready(function() {
 			elem.find('.delete_toggle').click(function() {
 				var elem = $(this);
 
-				$.post('/laravel/public/admin/menu/ajaxDestroy', {menu_id: elem.attr('rel')}, function(data) {
+				$.post(url_head + '/public/admin/menu/ajaxDestroy', {menu_id: elem.attr('rel')}, function(data) {
 					if (data.success) {
 						elem.closest('li').remove();
 						show_alert('success', 'Menu has been deleted')
@@ -65,7 +65,7 @@ $(document).ready(function() {
 		function save(target, parent_id, location) {
 			var order = target.sortable('toArray', {attribute: 'data-id'});
 
-			$.post('/laravel/public/admin/menu/updateOrder', {order: order, parent: parent_id},
+			$.post(url_head + '/public/admin/menu/updateOrder', {order: order, parent: parent_id},
 				function(data) {
 					if (data.success) {
 						show_alert('success', data.message + (parent_id == 0 ? location : ''));

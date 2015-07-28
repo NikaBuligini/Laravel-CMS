@@ -28,6 +28,7 @@ class RouteServiceProvider extends ServiceProvider {
 		$router->model('user', 'App\User');
 		$router->model('menu', 'App\Menu');
 		$router->model('content', 'App\Content');
+		$router->model('banner', 'App\Banner');
 	}
 
 	/**

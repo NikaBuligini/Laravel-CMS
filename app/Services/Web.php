@@ -4,6 +4,7 @@ use Auth;
 use URL;
 
 use App\Menu;
+use App\Banner;
 
 class Web {
 
@@ -89,8 +90,15 @@ class Web {
 			$class = count($item->children) > 0 ? ' class="hasGeneration"' : '';
 
 			if (!$contents->isEmpty()) {
-				$url = $contents->first()->url;
-				$target = $url ? $url : URL::to('/'.$item->slug);
+				$first_content = $contents->first();
+
+				if ($first_content->type->isURL()) {
+					$target = $first_content->url;
+				} else if ($first_content->type->isStatic()) {
+					$target = URL::to('/'.$first_content->slug->name);
+				} else {
+					$target = URL::to('/'.$item->slug);
+				}
 			}
 
 			$html .= '<li>'.'<a href="'.$target.'"'.$class.'>'.$item->name.'</a>';
@@ -105,6 +113,10 @@ class Web {
 		}
 
 		return $html;
+	}
+
+	public function banners() {
+		return Banner::orderBy('order')->get();
 	}
 }
 

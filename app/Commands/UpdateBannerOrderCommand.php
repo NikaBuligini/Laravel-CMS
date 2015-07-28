@@ -3,17 +3,15 @@
 use App\Commands\Command;
 
 use App\Activity;
-use App\Menu;
+use App\Banner;
 use App\User;
 use Session;
 
 use Illuminate\Contracts\Bus\SelfHandling;
 
-class UpdateMenuOrderCommand extends Command implements SelfHandling {
+class UpdateBannerOrderCommand extends Command implements SelfHandling {
 
 	protected $auth;
-
-	protected $parent;
 
 	protected $order;
 
@@ -22,9 +20,8 @@ class UpdateMenuOrderCommand extends Command implements SelfHandling {
 	 *
 	 * @return void
 	 */
-	public function __construct(User $user, $parent, $order) {
+	public function __construct(User $user, $order) {
 		$this->auth = $user;
-		$this->parent = $parent;
 		$this->order = $order;
 	}
 
@@ -37,23 +34,17 @@ class UpdateMenuOrderCommand extends Command implements SelfHandling {
 		$order = $this->order;
 
 		for ($i = 0; $i < count($order); $i++) {
-			$menu = Menu::findOrFail($order[$i]);
+			$banner = Banner::findOrFail($order[$i]);
 			$temp_order = $i + 1;
 
-			if ($menu->order != $temp_order) {
-				$menu->order = $temp_order;
-				$menu->save();
+			if ($banner->order != $temp_order) {
+				$banner->order = $temp_order;
+				$banner->save();
 			}
 		}
 
-		if (!$this->parent) {
-			$parent_link = 'Base menu';
-		} else {
-			$parent_link = $this->parent->linkedName();
-		}
-
 		Activity::create([
-			'text' => $this->auth->linkedName().' updated order for '.$parent_link."'s children menu list",
+			'text' => $this->auth->linkedName().' updated order for banners',
 			'user_id' => $this->auth->id
 		]);
 	}

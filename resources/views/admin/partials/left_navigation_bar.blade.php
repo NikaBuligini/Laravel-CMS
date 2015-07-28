@@ -43,10 +43,22 @@
 					<span>Users</span>
 				</a>
 			</li>
-			<li>
+			<!-- <li>
 				<a href="#">
 					<div class="logo"><i class="fa fa-tasks"></i></div>
 					<span>Tasks</span>
+				</a>
+			</li> -->
+			<li>
+				<a href="{{ action('Admin\CarouselController@index') }}">
+					<div class="logo"><i class="fa fa-dashcube"></i></div>
+					<span>Slider</span>
+				</a>
+			</li>
+			<li>
+				<a href="{{ action('Admin\BannerController@index') }}">
+					<div class="logo"><i class="fa fa-align-justify"></i></div>
+					<span>Banners</span>
 				</a>
 			</li>
 			<li>
