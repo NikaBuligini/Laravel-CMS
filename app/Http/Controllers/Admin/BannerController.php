@@ -67,7 +67,7 @@ class BannerController extends Controller {
 	 */
 	public function store(CreateBannerRequest $request) {
 		$this->dispatch(new CreateBannerCommand(Auth::user(), $request));
-		
+
 		return redirect('/admin/banner');
 	}
 

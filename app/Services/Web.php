@@ -5,6 +5,7 @@ use URL;
 
 use App\Menu;
 use App\Banner;
+use App\Carousel;
 
 class Web {
 
@@ -17,6 +18,8 @@ class Web {
 
 	protected $header_menus;
 	protected $footer_menus = [];
+
+	protected $carousel;
 	
 	function __construct() {
 		
@@ -117,6 +120,14 @@ class Web {
 
 	public function banners() {
 		return Banner::orderBy('order')->get();
+	}
+
+	public function carousel() {
+		if (!$this->carousel) {
+			$this->carousel = Carousel::orderBy('order')->get();
+		}
+
+		return $this->carousel;
 	}
 }
 

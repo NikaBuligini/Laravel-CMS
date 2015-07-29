@@ -7,30 +7,30 @@
 
 	<nav class="main-navigation">
 		<ul>
-			<li>
+			<!-- <li>
 				<a href="#">
 					<div class="logo"><i class="fa fa-dashboard"></i></div>
 					<span>Dashboard</span>
 				</a>
-			</li>
+			</li> -->
 			<li>
 				<a href="{{ action('Admin\MenuController@index') }}">
 					<div class="logo"><i class="fa fa-sitemap"></i></div>
 					<span>Menu Management</span>
 				</a>
 			</li>
-			<li>
+			<!-- <li>
 				<a href="#">
 					<div class="logo"><i class="fa fa-files-o"></i></div>
 					<span>Pages Management</span>
 				</a>
-			</li>
-			<li>
+			</li> -->
+			<!-- <li>
 				<a href="{{ action('Admin\SettingController@index') }}">
 					<div class="logo"><i class="fa fa-cogs"></i></div>
 					<span>Settings</span>
 				</a>
-			</li>
+			</li> -->
 			<li>
 				<a href="{{ action('Admin\GroupController@index') }}">
 					<div class="logo"><i class="fa fa-users"></i></div>

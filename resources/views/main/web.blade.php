@@ -5,26 +5,27 @@
 		<div class="row">
 			<div class="col-md-8 home_carousel">
 				<div id="carousel-example-generic" class="carousel slide card" data-ride="carousel">
-					<!-- Indicators -->
-					<ol class="carousel-indicators">
-						<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-						<li data-target="#carousel-example-generic" data-slide-to="1"></li>
-						<li data-target="#carousel-example-generic" data-slide-to="2"></li>
-					</ol>
+					@if(!$web->carousel()->isEmpty())
+						<ol class="carousel-indicators">
+							<?php $count = 0; ?>
+							@foreach($web->carousel() as $item)
+								<li data-target="#carousel-example-generic" 
+									class="{{ $count == 0 ? 'active' : ''}}"
+									data-slide-to="{{ $count++ }}"></li>
+							@endforeach
+						</ol>
 
-					<!-- Wrapper for slides -->
-					<div class="carousel-inner" role="listbox">
-						<div class="item active">
-							{!! Html::image('uploads/images/slider/red.jpg') !!}
-							<!--<div class="carousel-caption"></div>-->
+						<div class="carousel-inner" role="listbox">
+							<?php $count = 0; ?>
+							@foreach($web->carousel() as $item)
+								<div class="item {{ $count++ == 0 ? 'active' : '' }}">
+									<img src="{{ $item['image'] }}">
+								</div>
+							@endforeach
 						</div>
-						<div class="item">
-							{!! Html::image('uploads/images/slider/purple.jpg') !!}
-						</div>
-						<div class="item">
-							{!! Html::image('uploads/images/slider/blue.jpg') !!}
-						</div>
-					</div>
+					@else
+						@include('main/templates/carousel_default_items')
+					@endif
 
 					<!-- Controls -->
 					<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">

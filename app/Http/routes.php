@@ -43,7 +43,8 @@ Route::group(['prefix' => 'admin'], function() {
 		Route::get('group/{group}/destroy', 'Admin\GroupController@destroy');
 
 		Route::resource('carousel', 'Admin\CarouselController');
-		Route::get('carousel/{carousel}/destroy', 'Admin\CarouselController@destroy');
+		Route::post('carousel/updateOrder', 'Admin\CarouselController@updateCarouselOrder');
+		Route::post('carousel/ajaxDestroy', 'Admin\CarouselController@ajaxDestroy');
 
 		Route::resource('banner', 'Admin\BannerController');
 		Route::get('banner/{banner}/destroy', 'Admin\BannerController@destroy');

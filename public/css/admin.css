@@ -628,8 +628,9 @@ button.close {
 	background-color: #fff;
 	margin-bottom: 5px;
 }
-.carousel_container .dd-highlight {
-	margin-bottom: 20px;
+.carousels .dd-highlight {
+	margin-bottom: 10px;
+	height: 150px;
 }
 .banners .dd-highlight {
 	margin-bottom: 10px;
@@ -790,4 +791,42 @@ button.close {
 .card {
 	background-color: #fff !important;
 	box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+.carousels {
+	width: 340px;
+	margin: 30px auto 0 auto;
+	padding: 0;
+	list-style: none;
+}
+.carousels > .item {
+	padding: 0;
+	margin-bottom: 10px;
+	height: 150px;
+	position: relative;
+}
+.carousels > .item img {
+	height: 100%;
+	width: 100%;
+}
+.carousels .item .actions {
+	position: absolute;
+	top: 0;
+	right: 0;
+	min-width: 20px;
+	padding: 5px;
+	color: #fff;
+}
+.carousels .item .actions:hover {
+	background-color: #fff;
+}
+.carousels .item .actions:hover .remove {
+	color: #d9534f;
+}
+.carousels .item .actions .fa {
+	float: right;
+	cursor: pointer;
+}
+.carousel_pannel {
+	width: 340px;
 }

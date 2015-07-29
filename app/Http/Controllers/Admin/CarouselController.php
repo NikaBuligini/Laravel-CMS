@@ -4,7 +4,17 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Services\General;
 
+use App\Carousel;
+
+use Auth;
+use Session;
+use Validator;
+
 use Illuminate\Http\Request;
+
+use App\Commands\CreateCarouselCommand;
+use App\Commands\UpdateCarouselOrderCommand;
+use App\Commands\DestroyCarouselCommand;
 
 class CarouselController extends Controller {
 
@@ -16,10 +26,32 @@ class CarouselController extends Controller {
 	public function index(General $general)	{
 		$theme = $general->theme();
 
-		$theme['title'] = 'Menu';
-		$theme['description'] = 'desc';
+		$carousels = Carousel::orderBy('order')->get();
 
-		return view('admin.carousel.index', compact('theme'));
+		$theme['title'] = 'Slider';
+		$theme['description'] = 'add/remove or reorder slider images';
+
+		return view('admin.carousel.index', compact('theme', 'carousels'));
+	}
+
+	public function updateCarouselOrder(Request $request) {
+		$this->dispatch(new UpdateCarouselOrderCommand(Auth::user(), $request->order));
+
+		$message = 'Slider order has been updated!';
+
+		return ['success' => true, 'message' => $message];
+	}
+
+	public function ajaxDestroy(Request $request) {
+		$validator = Validator::make($request->all(), ['item_id' => 'required|min:1|exists:carousels,id']);
+
+		if ($validator->fails()) {
+			return ['success' => false, 'message' => $validator->errors()->first('item_id')];
+		}
+
+		$this->dispatch(new DestroyCarouselCommand(Auth::user(), Carousel::findOrFail($request['item_id'])));
+
+		return ['success' => true, 'id' => $request['item_id']];
 	}
 
 	/**
@@ -27,9 +59,15 @@ class CarouselController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create()
-	{
-		//
+	public function create(General $general) {
+		$theme = $general->theme();
+
+		$carousel = new Carousel();
+
+		$theme['title'] = 'Create Slider Image';
+		$theme['description'] = '';
+
+		return view('admin.carousel.create', compact('theme', 'carousel'));
 	}
 
 	/**
@@ -37,9 +75,14 @@ class CarouselController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
-	{
-		//
+	public function store(Request $request)	{
+		$this->validate($request, [
+			'image' => 'required|url'
+		]);
+
+		$this->dispatch(new CreateCarouselCommand(Auth::user(), $request));
+
+		return redirect('/admin/carousel');
 	}
 
 	/**
