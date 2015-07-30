@@ -1,3 +1,15 @@
+.noselect {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+.none {
+	display: none;
+}
+/*----*/
 .menuH {
 	float: left;
 	height: 55px;
@@ -256,7 +268,7 @@
 	float: left;
 	width: 120px;
 	height: 120px;
-	padding: 15px;
+	padding: 10px;
 	overflow: hidden;
 }
 .news_feed_img img {
@@ -569,4 +581,67 @@ footer a:hover, footer a:focus {
 .social_plugins {
 	width: 100%;
 	height: 30px;
+}
+
+.partners_slider_card {
+	height: 150px;
+	margin-bottom: 20px;
+	padding: 10px 30px;
+	position: relative;
+}
+.partners_slider_card .images_container {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	position: relative;
+}
+.partners_slider_card .images_container .content {
+	position: absolute;
+	height: 100%;
+	top: 0;
+	left: 0;
+	display: inline-flex;
+	-webkit-transition: 0.3s;
+	transition: 0.3s;
+}
+.partners_slider_card .images_container .content .item {
+	float: left;
+	width: 215px;
+	/*width: 32%;*/
+	height: 100%;
+	margin-left: 7.5px;
+	margin-right: 7.5px;
+	overflow: hidden;
+}
+.partners_slider_card .content .item img {
+	width: 100%;
+	height: 100%;
+}
+.partners_slider_card .side {
+	position: absolute;
+	top: 0;
+	height: 100%;
+	width: 30px;
+	text-align: center;
+}
+.partners_slider_card .left {
+	left: 0;
+}
+.partners_slider_card .right {
+	right: 0;
+}
+.partners_slider_card .side i {
+	position: absolute;
+	top: 50%;
+	margin-top: -7px;
+	text-shadow: 0 1px 2px rgba(0,0,0,.6);
+	color: #33A1DE;
+    text-shadow: 0 1px 2px rgba(0,0,0,.6);
+    cursor: pointer;
+}
+.partners_slider_card .left i {
+	left: 40%;
+}
+.partners_slider_card .right i {
+	right: 40%;
 }
