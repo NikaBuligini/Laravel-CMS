@@ -16,10 +16,14 @@ class Banner extends Model {
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['name', 'url', 'image', 'order'];
+	protected $fillable = ['name', 'url', 'image', 'order', 'banner_type_id'];
+
+	public function type() {
+		return $this->belongsTo('App\BannerType', 'banner_type_id');
+	}
 
 	public function generateOrder() {
-		$max = \DB::table($this->table)->max('order');
+		$max = \DB::table($this->table)->where('banner_type_id', $this->banner_type_id)->max('order');
 
 		if (!$max) {
 			$this->order = '1';
@@ -30,5 +34,13 @@ class Banner extends Model {
 
 	public function linkedName() {
 		return '<a href="'.action('Admin\BannerController@show', ['banner' => $this->id]).'">'.$this->name.'</a>';
+	}
+
+	public function scopeBasics($query) {
+		$query->where('banner_type_id', '1')->orderBy('order');
+	}
+
+	public function scopePartners($query) {
+		$query->where('banner_type_id', '2')->orderBy('order');
 	}
 }

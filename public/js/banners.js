@@ -21,6 +21,7 @@ $(document).ready(function() {
 		event.preventDefault();
 
 		var order = $('.banners').sortable('toArray', {attribute: 'data-id'});
+		console.log(order);
 
 		$.post(url_head + '/public/admin/banner/updateOrder', {order: order},
 			function(data) {

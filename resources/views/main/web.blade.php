@@ -28,9 +28,7 @@
 		</div>
 		<div class="row middle_row">
 			<div class="col-md-8">
-				<div class="partners_slider_card card noselect">
-					@include('main/partials/partners_slider')
-				</div>
+				@include('main/partials/partners_slider')
 
 				<div class="content_card card"></div>
 			</div>

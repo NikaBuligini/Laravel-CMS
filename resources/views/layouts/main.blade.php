@@ -12,6 +12,7 @@
 	<link href="{{ asset('/css/font-awesome.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/custom/main.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/custom/social-media.css') }}" rel="stylesheet">
+	<link href="{{ asset('/css/owl.carousel.css') }}" rel="stylesheet">
 
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
@@ -25,6 +26,7 @@
 
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="{{ asset('/js/jquery-ui.min.js') }}"></script>
+	<script src="{{ asset('/js/owl.carousel.min.js') }}"></script>
 </head>
 <body>
 	@include('main.partials.header')

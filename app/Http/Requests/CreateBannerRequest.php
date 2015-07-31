@@ -22,7 +22,8 @@ class CreateBannerRequest extends Request {
 		return [
 			'name' => 'required|min:2',
 			'url' => 'required|url',
-			'image' => 'required|url'
+			'image' => 'required|url',
+			'banner_type_id' => 'required|numeric|exists:banner_types,id'
 		];
 	}
 

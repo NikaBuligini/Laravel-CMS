@@ -54,6 +54,7 @@
 	{!! Form::label('image-preview', 'Image Preview:', ['class' => 'col-sm-3 control-label']) !!}
 	<div id="image-preview" class="col-sm-8"></div>
 </div>
+{!! Form::hidden('banner_type_id', $type['id']) !!}
 
 <div class="form-group">
 	<div class="col-sm-offset-3 col-sm-8">

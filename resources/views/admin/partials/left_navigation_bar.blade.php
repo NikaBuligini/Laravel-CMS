@@ -56,9 +56,15 @@
 				</a>
 			</li>
 			<li>
-				<a href="{{ action('Admin\BannerController@index') }}">
+				<a href="{{ action('Admin\BannerController@index', ['type' => 1]) }}">
 					<div class="logo"><i class="fa fa-align-justify"></i></div>
 					<span>Banners</span>
+				</a>
+			</li>
+			<li>
+				<a href="{{ action('Admin\BannerController@index', ['type' => 2]) }}">
+					<div class="logo"><i class="fa fa-suitcase"></i></div>
+					<span>Partners</span>
 				</a>
 			</li>
 			<li>

@@ -20,6 +20,9 @@ class Web {
 	protected $footer_menus = [];
 
 	protected $carousel;
+
+	protected $basic_banners;
+	protected $partner_banners;
 	
 	function __construct() {
 		
@@ -118,16 +121,28 @@ class Web {
 		return $html;
 	}
 
-	public function banners() {
-		return Banner::orderBy('order')->get();
-	}
-
 	public function carousel() {
 		if (!$this->carousel) {
 			$this->carousel = Carousel::orderBy('order')->get();
 		}
 
 		return $this->carousel;
+	}
+
+	public function banners() {
+		if (!$this->basic_banners) {
+			$this->basic_banners = Banner::basics()->get();
+		}
+
+		return $this->basic_banners;
+	}
+
+	public function partners() {
+		if (!$this->partner_banners) {
+			$this->partner_banners = Banner::partners()->get();
+		}
+		
+		return $this->partner_banners;
 	}
 }
 

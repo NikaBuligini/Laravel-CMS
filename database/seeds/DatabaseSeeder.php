@@ -10,6 +10,7 @@ use App\MenuStatus;
 use App\MenuLocation;
 use App\SlugAttribute;
 use App\ContentType;
+use App\BannerType;
 
 class DatabaseSeeder extends Seeder {
 
@@ -28,6 +29,7 @@ class DatabaseSeeder extends Seeder {
 		$this->call('MenuLocationSeeder');
 		$this->call('SlugAttributeSeeder');
 		$this->call('ContentTypesSeeder');
+		$this->call('BannerTypesSeeder');
 	}
 
 }
@@ -111,6 +113,17 @@ class ContentTypesSeeder extends Seeder {
 		ContentType::create(['name' => 'Static']);
 		ContentType::create(['name' => 'Dynamic']);
 		ContentType::create(['name' => 'URL']);
+	}
+
+}
+
+class BannerTypesSeeder extends Seeder {
+
+	public function run() {
+		DB::table('banner_types')->delete();
+
+		BannerType::create(['name' => 'Basic']);
+		BannerType::create(['name' => 'Partner']);
 	}
 
 }

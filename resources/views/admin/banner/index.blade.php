@@ -8,7 +8,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="pannel">
-						<a href="banner/create" class="btn green-btn">
+						<a href="{{ action('Admin\BannerController@create', ['type' => $type['id']]) }}" class="btn green-btn">
 							<i class="fa fa-plus"></i><span>Create</span>
 						</a>
 						<a href="banner/saveOrder" id="save" class="btn green-btn" disabled="disabled">

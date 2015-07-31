@@ -43,7 +43,9 @@ class UpdateBannerCommand extends Command implements SelfHandling {
 			'text' => $this->auth->linkedName().' updated banner named '.$this->banner->linkedName(),
 			'user_id' => $this->auth->id
 		]);
-		Session::flash('flash_message', 'You have updated banner!');
+
+		$type = $this->banner->type->name;
+		Session::flash('flash_message', 'You have updated '.$type.'!');
 	}
 
 }

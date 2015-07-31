@@ -41,7 +41,9 @@ class CreateBannerCommand extends Command implements SelfHandling {
 			'text' => $this->auth->linkedName().' created new banner named '.$banner->linkedName(),
 			'user_id' => $this->auth->id
 		]);
-		Session::flash('flash_message', 'Your banner has been created!');
+
+		$type = $banner->type->name;
+		Session::flash('flash_message', 'Your '.$type.' has been created!');
 	}
 
 }
