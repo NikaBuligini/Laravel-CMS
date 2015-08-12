@@ -24,6 +24,10 @@
 					</div>
 					@endforeach
 				</div>
+
+				<div class="contents_pagination">
+					{!! $contents->render() !!}
+				</div>
 			</div>
 			
 			@include('main/partials/right_pannel')

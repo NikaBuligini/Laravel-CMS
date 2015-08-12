@@ -7,6 +7,7 @@ use App\Services\General;
 use App\Menu;
 use App\Content;
 use App\ContentType;
+use App\Category;
 
 use Auth;
 use Session;
@@ -25,8 +26,13 @@ class ContentController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index() {
-		//
+	public function index(General $general) {
+		$theme = $general->theme();
+
+		$theme['title'] = 'Contents';
+		$theme['description'] = '';
+
+		return view('admin.content.index', compact('theme'));
 	}
 
 	/**
@@ -48,10 +54,12 @@ class ContentController extends Controller {
 
 		$types = ContentType::chooseTypes();
 
+		$categories = Category::chooseCategories();
+
 		$theme['title'] = 'Create Content';
 		$theme['description'] = 'description for content creation';
 
-		return view('admin.content.create', compact('theme', 'menu', 'menus', 'content', 'types'));
+		return view('admin.content.create', compact('theme', 'menu', 'menus', 'content', 'types', 'categories'));
 	}
 
 	/**
@@ -106,12 +114,14 @@ class ContentController extends Controller {
 
 		$types = ContentType::chooseTypes();
 
+		$categories = Category::chooseCategories();
+
 		$theme['title'] = 'Update Content';
 		$theme['description'] = 'description for content creation';
 
 		$button_text = 'Update Content';
 
-		return view('admin.content.edit', compact('theme', 'menu', 'menus', 'content', 'types', 'button_text'));
+		return view('admin.content.edit', compact('theme', 'menu', 'menus', 'content', 'types', 'categories', 'button_text'));
 	}
 
 	/**

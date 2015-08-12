@@ -21,7 +21,7 @@ class Content extends Model {
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['menu_id', 'type_id', 'slug_id', 'url', 'static_file_name', 'image',
+	protected $fillable = ['menu_id', 'type_id', 'slug_id', 'url', 'static_file_name', 'category_id', 'image',
 		'name_ka', 'name_en', 'name_ru', 'description_ka', 'description_en', 'description_ru',
 		'body_ka', 'body_en', 'body_ru', 'gallery', 'publish_date'];
 
@@ -35,6 +35,10 @@ class Content extends Model {
 
 	public function type() {
 		return $this->belongsTo('App\ContentType');
+	}
+
+	public function category() {
+		return $this->belongsTo('App\Category');
 	}
 
 	public function linkedName() {

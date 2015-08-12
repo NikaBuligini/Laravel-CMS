@@ -827,6 +827,40 @@ button.close {
 	float: right;
 	cursor: pointer;
 }
-.carousel_pannel {
+.carousel_pannel, .categories_pannel {
 	width: 340px;
+}
+
+.content_form {
+	width: 400px;
+}
+
+
+.categories {
+	width: 400px;
+	margin: 30px auto 0 auto;
+	padding: 0;
+	list-style: none;
+}
+.categories li {
+	line-height: 30px;
+	margin-bottom: 10px;
+}
+.categories li > span {
+	margin-left: 10px;
+}
+.categories li .pull-right {
+	margin-right: 10px;
+}
+.categories li .pull-right i {
+	cursor: pointer;
+}
+.categories li .pull-right .view_toggle {
+	color: #23527C;
+}
+.categories li .pull-right .edit_toggle {
+	color: #1AB394;
+}
+.categories li .pull-right .delete_toggle {
+	color: #E50000;
 }

@@ -38,6 +38,9 @@ Route::group(['prefix' => 'admin'], function() {
 
 		Route::resource('content', 'Admin\ContentController');
 		Route::get('content/{content}/destroy', 'Admin\ContentController@destroy');
+
+		Route::resource('category', 'Admin\CategoryController');
+		Route::get('category/{category}/destroy', 'Admin\CategoryController@destroy');
 		
 		Route::resource('group', 'Admin\GroupController');
 		Route::get('group/{group}/destroy', 'Admin\GroupController@destroy');

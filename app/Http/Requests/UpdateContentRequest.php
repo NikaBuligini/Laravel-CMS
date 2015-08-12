@@ -34,6 +34,7 @@ class UpdateContentRequest extends Request {
 			'static_file_name' => 'required_if:type_id,1|min:2',
 
 			'publish_date' => 'required_if:type_id,2|date',
+			'category_id' => 'numeric|exists:categories,id',
 			'description_ka' => '',
 			'description_en' => '',
 			'description_ru' => '',

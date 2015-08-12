@@ -81,7 +81,14 @@ class WelcomeController extends Controller {
 				return redirect(action('WelcomeController@slug', ['slug' => $content->slug->name]));
 			} else {
 				// dd($contents);
-				$contents = $contents->take(5); // add skip for pagination
+				// $contents = $contents->take(2); // add skip for pagination
+				$contents = $menu->contentsPagination();
+
+				if ($contents->count() == 0) {
+					abort(404);
+				}
+
+				$contents->setPath($menu->slug->name);
 				return view('main.multi_dynamic_contents', compact('web', 'contents'));
 			}
 		} else if ($slug->slug_attribute_id == SlugAttribute::FOR_CONTENT) {

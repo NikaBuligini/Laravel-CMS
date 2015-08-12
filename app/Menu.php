@@ -160,4 +160,8 @@ class Menu extends Model {
 	}
 	// NOT STABLE
 
+
+	public function contentsPagination() {
+		return Content::where('menu_id', $this->id)->orderBy('publish_date')->paginate(5);
+	}
 }

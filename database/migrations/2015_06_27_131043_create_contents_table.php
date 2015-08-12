@@ -17,6 +17,8 @@ class CreateContentsTable extends Migration {
 			$table->foreign('menu_id')->references('id')->on('menus')->onDelete('cascade');
 			$table->integer('type_id')->unsigned();
 			$table->foreign('type_id')->references('id')->on('content_types')->onDelete('cascade');
+			$table->integer('category_id')->unsigned();
+			$table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
 			$table->integer('slug_id')->unsigned();
 			$table->string('url');
 			$table->string('static_file_name');

@@ -92,6 +92,12 @@
 
 <!-- Dynamic Content Fields -->
 <div class="form-group hideable dynamic none">
+	{!! Form::label('category_id', 'Category:', ['class' => 'col-sm-3 control-label']) !!}
+	<div class="col-sm-8">
+		{!! Form::select('category_id', $categories, $content['category_id'], ['class' => 'form-control']) !!}
+	</div>
+</div>
+<div class="form-group hideable dynamic none">
 	{!! Form::label('publish_date', 'Publish Date:', ['class' => 'col-sm-3 control-label']) !!}
 	<div class="col-sm-8 date">
 		{!! Form::text('publish_date', $content['publish_date'], ['class' => 'form-control date', 'placeholder' => 'Content publish at', 'autocomplete' => 'off']) !!}

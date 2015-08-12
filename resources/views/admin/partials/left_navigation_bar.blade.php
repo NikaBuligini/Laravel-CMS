@@ -20,11 +20,17 @@
 				</a>
 			</li>
 			<!-- <li>
-				<a href="#">
+				<a href="{{ action('Admin\ContentController@index') }}">
 					<div class="logo"><i class="fa fa-files-o"></i></div>
-					<span>Pages Management</span>
+					<span>Contents</span>
 				</a>
 			</li> -->
+			<li>
+				<a href="{{ action('Admin\CategoryController@index') }}">
+					<div class="logo"><i class="fa fa-flask"></i></div>
+					<span>Categories</span>
+				</a>
+			</li>
 			<!-- <li>
 				<a href="{{ action('Admin\SettingController@index') }}">
 					<div class="logo"><i class="fa fa-cogs"></i></div>

@@ -520,6 +520,12 @@ footer a:hover, footer a:focus {
 	vertical-align: middle;
 }
 
+.contents_pagination {
+	position: relative;
+	width: 100%;
+	margin-top: 20px;
+}
+
 
 
 .single_content .head {
