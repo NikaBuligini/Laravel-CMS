@@ -30,7 +30,9 @@
 			<div class="col-md-8">
 				@include('main/partials/partners_slider')
 
-				<div class="content_card card"></div>
+				<div class="content_card card">
+					{{ $web->projects() }}
+				</div>
 			</div>
 
 			@include('main/partials/right_pannel')

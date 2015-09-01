@@ -23,6 +23,8 @@ class Web {
 
 	protected $basic_banners;
 	protected $partner_banners;
+
+	protected $projects;
 	
 	function __construct() {
 		
@@ -143,6 +145,22 @@ class Web {
 		}
 		
 		return $this->partner_banners;
+	}
+
+	public function projects() {
+		if (!$this->projects) {
+			$projects_menu = Menu::where('id', 2)->get();
+
+			if (!$projects_menu->isEmpty()) {
+				$this->projects = $projects->contents->sortByDesc(function($content) 
+				{
+					return $content->publish_date;
+				});
+			}
+		}
+
+		dd($this->projects);
+		return $this->projects;
 	}
 }
 
